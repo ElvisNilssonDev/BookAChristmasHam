@@ -1,12 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System.Text.Json;
+using Spectre.Console;
 
 namespace BookAChristmasHam.Service
 {
-    internal class JsonService
+    public static class JsonService
     {
-    }
+        // Generisk JsonService klass för hantering av JSON-data.
+
+        // statick generisk metod för att läsa JSON-data från fil
+        public static List<T> ReadFromJsonFile<T>(string filePath)
+        {
+            //  relative sökväg för bättre läsbarhet, kan man ändra senare
+            var displayPath = PathService.GetRelativePath(filePath);
+
+
+
+            if (!File.Exists(filePath))
+            {
+                AnsiConsole.MarkupLine($"[yellow]Filen hittades inte:[/] {displayPath}");
+                return new List<T>();
+            }
+
+            // läs JSON-innehållet från filen
+            var json = File.ReadAllText(filePath);
+
+            // deserialisera JSON till lista av objekt av typ T
+            var items = JsonSerializer.Deserialize<List<T>>(json);
+
+            return items ?? new List<T>(); // kollar om items är null, returnerar tom lista om så är fallet
+
+            // fixar till try catch senare med feedback till användaren
+
+        }
+
+        public static void SaveToJsonFile<T>(List<T> items, string filePath)
+        {
+            var displayPath = PathService.GetRelativePath(filePath);
+
+            // serialisera listan av objekt till JSON-format
+            var json = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
+
+            // skriv JSON-innehållet till filen
+            File.WriteAllText(filePath, json);
+
+            // visar feedback 
+            AnsiConsole.MarkupLine($"[green]Data sparad i fil:[/] {displayPath}");
+
+
+            // fixar till try catch senare med feedback till användaren
+        }
+
+    } // end of class
+
+
 }
