@@ -28,7 +28,7 @@ namespace BookAChristmasHam.Service
         }
 
 
-        // Read-metod för att läsa från JSON-fil
+        // Hämtar alla objekt från lagringen
         public IEnumerable<T> GetAll()              // IEnumerable istället för List. Mer flexibel, säkrare. Nackdel: måste skicka Tolist()
         {
             return _items;
