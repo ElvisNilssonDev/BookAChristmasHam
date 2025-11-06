@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Collections;
 
 namespace BookAChristmasHam.Service
 {
-    internal class DataStore
+    // Generisk klass för datalagring
+    public class DataStore<T>               // typbegränsar senare
     {
+      
+
+
+
     }
 }
+// DataStore<T> - (skapa Lista och properties ) Read (Skapa även JSON) - @Ehsan 
