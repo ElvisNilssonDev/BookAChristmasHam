@@ -5,6 +5,6 @@ namespace BookAChristmasHam.Interfaces
     {
         // Alla objekt som implementerar detta interface måste ha en Id property av typen int.
         // alltså en identifierare för objektet.
-        int id { get; set; }
+        int Id { get; set; }
     }
 }

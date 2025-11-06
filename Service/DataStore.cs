@@ -1,5 +1,7 @@
 ﻿
+using System;
 using System.Collections;
+using System.Xml.Linq;
 
 namespace BookAChristmasHam.Service
 {
@@ -33,9 +35,32 @@ namespace BookAChristmasHam.Service
         {
             return _items;
         }
-
-
-
+        public T? Get(int id)
+        {
+            return _items.FirstOrDefault(item => item.Id == id);
+        }
+        public bool Delete(int id)//ta bort objekt med angivet Id
+        {
+            var item = Get(id);//hitta objektet med det angivna Id
+            if (item != null)
+            {
+                _items.Remove(item);//ta bort objektet från listan
+                return true;
+                //Kan ha en Save(); här sedan, för att spara om de krashar.
+            }
+            return false;//om objektet inte hittades
+        }
+        public bool Update(T item)//uppdatera objekt med angivet Id
+        {
+            var index = _items.FindIndex(i => i.Id == item.Id);//hitta index för objektet som ska uppdateras
+            if (index != -1)//om objektet finns i listan
+            {
+                _items[index] = item;//uppdatera objektet i listan
+                return true;
+                //Kan ha en Save(); här också sedan, för att spara om de krashar.
+            }
+            return false;//om objektet inte hittades
+        }
     }
 }
 // DataStore<T> - (skapa Lista och properties ) Read (Skapa även JSON) - @Ehsan 
