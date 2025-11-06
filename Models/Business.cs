@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookAChristmasHam.Models
 {
-    internal class Business
+    internal class Business : User//Arv från User-klassen
     {
+        private int Id { get; set; }//Företagets unika "ID"
+        public string CompanyName { get; set; }//Företagets namn t.ex Pågen AB
     }
 }
