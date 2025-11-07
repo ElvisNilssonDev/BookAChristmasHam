@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Merry Christmas, we have Ham for you!");
+            Console.WriteLine("Closed for now, opening soon :D");
+
         }
     }
 }

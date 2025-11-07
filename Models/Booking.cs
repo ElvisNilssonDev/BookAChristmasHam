@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace BookAChristmasHam.Models
 {
-    internal class Booking
+    public class Booking : Interfaces.IHasId
     {
+        public int Id { get; set; }
+        public int BusinessId { get; set; }
+        public int ChristmasHamId { get; set; }
+
+        // om vi vill lägga till fler properties i framtiden
+        //public DateTime BookingDate { get; set; }
+        //public int Quantity { get; set; }   = 0;
     }
 }
