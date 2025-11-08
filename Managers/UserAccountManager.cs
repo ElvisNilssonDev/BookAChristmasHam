@@ -5,13 +5,14 @@ using BookAChristmasHam.Service;
 
 namespace BookAChristmasHam.Managers
 {
-        
-
+       
+    // hanterar 
     public class UserAccountManager
     {
         // user-lagring 
         private readonly DataStore<User> _userStore;
 
+        //Konstruktor
         public UserAccountManager(DataStore<User> userStore)
         {
             _userStore = userStore;
@@ -24,7 +25,7 @@ namespace BookAChristmasHam.Managers
             return _userStore.GetAll().FirstOrDefault(u => u.Email == email && u.Password == password);
         }
 
-        // Skapa ny användare
+        // Skapa (add) ny användare
         public void Register(User user)
         {
             _userStore.Add(user);
@@ -42,7 +43,7 @@ namespace BookAChristmasHam.Managers
         }
 
 
-        // kan man lägga in fler fkner
+        // kan man lägga in fler fkner, ex mer CRUD om vi vill
 
 
     }
