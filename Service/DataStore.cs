@@ -86,7 +86,7 @@ namespace BookAChristmasHam.Service
         public void Add(T item)
         {
             item.Id = GetNextId(); // sätt unikt id varje gång du skapar en item.
-            _items.Add(item);
+            _items.Add(item); 
         }
 
         // ger nästa lediga id för ett nytt objekt
