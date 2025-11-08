@@ -31,7 +31,7 @@ namespace BookAChristmasHam.Managers
         // lagringsinstans (_bookingStore) för Booking. Hanterar bokningar (List<Booking> _items). Innehåller metoder från DataStore-klassen.
         private readonly DataStore<Booking> _bookingStore;
 
-       
+        
         // KONSTRUKTOR
         public BusinessManager(DataStore<ChristmasHam> hamStore, DataStore<Booking> bookingstore)
         {
