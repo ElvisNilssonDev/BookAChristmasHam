@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookAChristmasHam.Service
+namespace BookAChristmasHam.UI.Menu
 {
-    internal class UserManager
+    internal class EntryPoint
     {
     }
 }

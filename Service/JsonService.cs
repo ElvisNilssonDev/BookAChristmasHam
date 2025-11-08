@@ -42,7 +42,7 @@ namespace BookAChristmasHam.Service
             var json = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
 
             // skriv JSON-innehållet till filen
-            File.WriteAllText(filePath, json);
+            File.WriteAllText(filePath, json); //skriver över filen (fast det gammla ta inte bort!)
 
             // visar feedback 
             AnsiConsole.MarkupLine($"[green]Data sparad i fil:[/] {displayPath}");
