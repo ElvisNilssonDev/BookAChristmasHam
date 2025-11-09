@@ -9,10 +9,10 @@ namespace BookAChristmasHam.Service
 {
     // BusinessManager hanterar affärslogik relaterad till Business, ChristmasHam och Booking(order)
     public class BusinessManager
-    { 
-       
+    {
+
         // lagringsinstans (_bookingStore) för Booking. Hanterar bokningar (List<Booking> _items). Innehåller metoder från DataStore-klassen.
-        private readonly DataStore<Booking> _bookingStore; 
+        private readonly DataStore<Booking> _bookingStore;
 
         //konstruktorn
         public BusinessManager(DataStore<Booking> bookingStore)
@@ -20,7 +20,22 @@ namespace BookAChristmasHam.Service
             _bookingStore = bookingStore;
         }
 
-
+        //Radera bokning
+        public bool DeleteOrder(int bookingId)
+        {
+            var booking = _bookingStore.GetAll().FirstOrDefault(b => b.Id == bookingId);
+            if (booking == null)
+            {
+                return false;
+            }
+            var result = _bookingStore.Delete(bookingId);
+            if (result)
+            {
+                //_bookingStore.SaveToJson(); kommer sedan att lägga till denna metod (SaveToJson()) i DataStore-klassen
+            }
+            return result;
+        }
+        
         // Uppdatera bokning
         public bool UpdateBooking(Booking updatedBooking)
         {
