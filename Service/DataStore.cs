@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections;
+using System.Text.Json;
 using System.Xml.Linq;
 
 namespace BookAChristmasHam.Service
@@ -61,6 +62,45 @@ namespace BookAChristmasHam.Service
             }
             return false;//om objektet inte hittades
         }
+
+        //Laddar datan från JSON-filen
+        public void Load()
+        {
+            try
+            {
+                if (File.Exists(_filePath)) //kolla om filen finns
+                {
+                    //Läser in JSON-filen som en string
+                    var jsonString = File.ReadAllText(_filePath);
+
+                    // Deserialisera stringen till en lista av T
+                    var loadedItems = JsonSerializer.Deserialize<List<T>>(jsonString);
+
+                    if (loadedItems != null) //kolla om deserialiseringen lyckades
+                    {
+                        _items = loadedItems;
+                        Console.WriteLine($"Loaded {_items.Count} items from {_filePath}."); //Visa antal inlästa objekt
+                    }
+                    else //Om filen var tom eller ogiltig
+                    {
+                        Console.WriteLine($"The file {_filePath} was empty or invalid. Starting with an empty list.");
+                        _items = new List<T>(); //Starta med en tom lista så att programmet fortsätter fungera
+                    }
+                }
+                else //Om filen inte finns
+                {
+                    Console.WriteLine($"The file {_filePath} does not exist. Creating a new list.");
+                    _items = new List<T>(); //Starta med en tom lista
+                }
+            }
+            catch (Exception ex) //Fånga alla fel som kan uppstå under inläsningen
+            {
+                Console.WriteLine($"Error loading file {_filePath}: {ex.Message}"); //Visa felmeddelande
+                _items = new List<T>(); //Starta med en tom lista för att programmet ska fortsätta fungera
+            }
+        }
     }
+
+
 }
 // DataStore<T> - (skapa Lista och properties ) Read (Skapa även JSON) - @Ehsan 
