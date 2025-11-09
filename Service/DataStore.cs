@@ -24,11 +24,12 @@ namespace BookAChristmasHam.Service
         // filväg för JSON-lagring
         private readonly string _filePath;
 
-        // konstruktor 
+        //konstruktor
         public DataStore(string filePath)
         {
             _filePath = filePath;
         }
+
 
         // Hämtar alla objekt från lagringen
         public IEnumerable<T> GetAll()              // IEnumerable istället för List. Mer flexibel, säkrare. Nackdel: måste skicka Tolist()
@@ -36,7 +37,7 @@ namespace BookAChristmasHam.Service
             return _items;
         }
 
-        
+
         public T? Get(int id)
         {
             return _items.FirstOrDefault(item => item.Id == id);
@@ -86,7 +87,7 @@ namespace BookAChristmasHam.Service
         public void Add(T item)
         {
             item.Id = GetNextId(); // sätt unikt id varje gång du skapar en item.
-            _items.Add(item); 
+            _items.Add(item);
         }
 
         // ger nästa lediga id för ett nytt objekt

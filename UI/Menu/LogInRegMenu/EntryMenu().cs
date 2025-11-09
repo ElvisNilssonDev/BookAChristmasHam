@@ -6,18 +6,18 @@ using BookAChristmasHam.Managers;
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 {
 
-    public class MainMenu
+    public class EntryMenu
     {
         private readonly DataStore<User> _userStore;
         private readonly UserAccountManager _accountManager;
 
-        public MainMenu()
-        {
+        public EntryMenu()
+        {            
             _userStore = new DataStore<User>(PathService.GetDataFilePath("users.json"));
             _accountManager = new UserAccountManager(_userStore);
         }
 
-        public void Show()
+        public User? Show()
         {
             while (true)
             {
@@ -34,7 +34,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                         if (user != null)
                         {
                             AnsiConsole.MarkupLine($"[green]Inloggad som {user.Name} ({user.Type})[/]");
-                            return;
+                            return user;
                         }
                         break;
 
@@ -45,7 +45,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
                     case "Avsluta":
                         AnsiConsole.MarkupLine("[yellow]Programmet avslutas...[/]");
-                        return;
+                        return null;
                 }
             }
         }

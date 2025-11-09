@@ -16,13 +16,15 @@ namespace BookAChristmasHam.Models
 
     public class Business : User       
     {
+        //private int Id { get; set; }//Företagets unika "ID". Eftersom vi använder arv, behövs inte!
         public string CompanyName { get; set; }
         //public string Address { get; set; }
 
         public Business()
         {
-            Type = UserType.Business; // ← Sätt typ automatiskt
+            Type = UserType.Business; //  Sätts automatiskt
         }
+
     }
 
 

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Spectre.Console;
 
 namespace BookAChristmasHam.Service
@@ -38,8 +39,15 @@ namespace BookAChristmasHam.Service
         {
             var displayPath = PathService.GetRelativePath(filePath);
 
+            // behövs för UserType printa ut sträng
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                WriteIndented = true 
+            };
+
             // serialisera listan av objekt till JSON-format
-            var json = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
+            var json = JsonSerializer.Serialize(items, options);
 
             // skriv JSON-innehållet till filen
             File.WriteAllText(filePath, json); //skriver över filen (fast det gammla ta inte bort!)

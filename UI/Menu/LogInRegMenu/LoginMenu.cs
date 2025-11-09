@@ -4,7 +4,6 @@ using BookAChristmasHam.Service;
 
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 {
-
     public class LoginMenu
     {
         private readonly DataStore<User> _userStore;
@@ -30,6 +29,13 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
             if (user == null)
             {
                 AnsiConsole.MarkupLine("[red]Felaktiga inloggningsuppgifter.[/]");
+                return null;
+            }
+
+            // Validera företagsanvändare
+            if (user is Business businessUser && string.IsNullOrWhiteSpace(businessUser.CompanyName))
+            {
+                AnsiConsole.MarkupLine("[red]Ogiltig företagsanvändare – saknar företagsnamn.[/]");
                 return null;
             }
 

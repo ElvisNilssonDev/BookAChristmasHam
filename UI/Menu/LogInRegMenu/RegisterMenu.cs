@@ -31,16 +31,39 @@ public class RegisterMenu
                 .AddChoices(UserType.Private, UserType.Business)
         );
 
-        var newUser = new User
+        User newUser;
+
+        if (type == UserType.Business)
         {
-            Name = name,
-            Email = email,
-            Password = password,
-            Type = type
-        };
+            var companyName = AnsiConsole.Ask<string>("Ange företagsnamn:");
+
+            if (string.IsNullOrWhiteSpace(companyName))
+            {
+                AnsiConsole.MarkupLine("[red]Företagsnamn krävs för Business-användare.[/]");
+                return;
+            }
+
+            newUser = new Business
+            {
+                Name = name,
+                Email = email,
+                Password = password,
+                CompanyName = companyName
+            };
+        }
+        else
+        {
+            newUser = new User
+            {
+                Name = name,
+                Email = email,
+                Password = password,
+                Type = UserType.Private
+            };
+        }
 
         _accountManager.Register(newUser);
-        _accountManager.Save(); // om du har en Save-metod
+        _accountManager.Save(); 
         AnsiConsole.MarkupLine("[green]Registrering lyckades![/]");
     }
 }
