@@ -1,18 +1,20 @@
-﻿using Spectre.Console;
+﻿using BookAChristmasHam.Managers;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Service;
+using Spectre.Console;
 
 namespace BookAChristmasHam.UI.Authors
 {
     // user ska kunna logga in 
     public class Login // Alla user kan logga in, både user-p och user-b
+    {
+        //Alternativ inloggningsflöde
 
-    {   // lagring av user.
-        private readonly DataStore<User> _userStore;
+        private readonly UserAccountManager _accountManager;
 
-        public Login(DataStore<User> userStore)
+        public Login(UserAccountManager accountManager)
         {
-            _userStore = userStore;
+            _accountManager = accountManager;
         }
 
         public User? Prompt() // fråga efter user info, rega ny användare 
@@ -27,7 +29,9 @@ namespace BookAChristmasHam.UI.Authors
             );
 
             // kollar om den som loggar in finns i systemet
-            var user = _userStore.GetAll().FirstOrDefault(u => u.Email == email && u.Password == password);
+
+
+            var user = _accountManager.Authenticate(email, password);
 
             if (user == null)
             {

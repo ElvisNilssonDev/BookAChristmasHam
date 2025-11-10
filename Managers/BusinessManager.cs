@@ -23,7 +23,7 @@ namespace BookAChristmasHam.Managers
 
 
     // HANTERAR HAM 
-    public class BusinessManager // Hanterar Ham-operationer + booknings-operationer. 
+    public class BusinessManager // Hanterar Ham-operationer + booknings-operationer för företagsanvändare
     {
         // HAM-LAGRING + METODER
         private readonly DataStore<ChristmasHam> _hamStore;
@@ -31,12 +31,19 @@ namespace BookAChristmasHam.Managers
         // lagringsinstans (_bookingStore) för Booking. Hanterar bokningar (List<Booking> _items). Innehåller metoder från DataStore-klassen.
         private readonly DataStore<Booking> _bookingStore;
 
-        
-        // KONSTRUKTOR
-        public BusinessManager(DataStore<ChristmasHam> hamStore, DataStore<Booking> bookingstore)
+
+        //// KONSTRUKTOR
+        //public BusinessManager(DataStore<ChristmasHam> hamStore, DataStore<Booking> bookingstore)
+        //{
+        //    _hamStore = hamStore;
+        //    _bookingStore = bookingstore;
+        //}
+
+        // Konstruktor: tar emot StorageService
+        public BusinessManager(StorageService storage)
         {
-            _hamStore = hamStore;
-            _bookingStore = bookingstore;
+            _hamStore = storage.HamStore;
+            _bookingStore = storage.BookingStore;
         }
 
         //-------------
@@ -45,7 +52,7 @@ namespace BookAChristmasHam.Managers
 
         // ----BokningsOperationer
 
-       
+
         // Ta bort en order
         public bool DeleteOrder(int bookingId)
         {

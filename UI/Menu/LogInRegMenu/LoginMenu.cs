@@ -1,16 +1,18 @@
-﻿using Spectre.Console;
+﻿using BookAChristmasHam.Managers;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Service;
+using Spectre.Console;
 
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 {
     public class LoginMenu
-    {
-        private readonly DataStore<User> _userStore;
+    { //Hantera inloggning	
 
-        public LoginMenu(DataStore<User> userStore)
+        private readonly UserAccountManager _accountManager;
+
+        public LoginMenu(UserAccountManager accountManager)
         {
-            _userStore = userStore;
+            _accountManager = accountManager;
         }
 
         public User? Prompt()
@@ -24,7 +26,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                     .Secret()
             );
 
-            var user = _userStore.GetAll().FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = _accountManager.Authenticate(email, password);
 
             if (user == null)
             {

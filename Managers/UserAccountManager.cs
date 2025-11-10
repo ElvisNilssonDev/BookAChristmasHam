@@ -12,12 +12,22 @@ namespace BookAChristmasHam.Managers
         // user-lagring 
         private readonly DataStore<User> _userStore;
 
-        //Konstruktor
-        public UserAccountManager(DataStore<User> userStore)
+        //Konstruktor: tar emot StorageService för att hämta UserStore (användardata)
+        public UserAccountManager(StorageService storage)
         {
-            _userStore = userStore;
-            _userStore.LoadFromJson(); // hämta users från mappen Data/users.json
+
+            _userStore = storage.UserStore; // json-laddas in vid instans av UserAccountManager
         }
+
+
+        ////Konstruktor
+        //public UserAccountManager(DataStore<User> userStore)
+        //{
+        //    _userStore = userStore;
+        //    _userStore.LoadFromJson(); // hämta users från mappen Data/users.json
+        //}
+
+
 
         // checka user-info
         public User? Authenticate(string email, string password)

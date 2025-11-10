@@ -5,7 +5,7 @@ using BookAChristmasHam.Managers;
 
 
 namespace BookAChristmasHam.UI.Authors
-{
+{ // hanterar Registrering
 
     public class Register // Rega ny användare
     {

@@ -5,7 +5,8 @@ using BookAChristmasHam.Managers;
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu;
 
 public class RegisterMenu
-{
+{ // Hantera registrering av ny användare.	
+
     private readonly UserAccountManager _accountManager;
 
     public RegisterMenu(UserAccountManager accountManager)
@@ -19,6 +20,13 @@ public class RegisterMenu
 
         var name = AnsiConsole.Ask<string>("Ange ditt namn:");
         var email = AnsiConsole.Ask<string>("Ange din e-post:");
+
+        if (_accountManager.EmailExists(email))
+        {
+            AnsiConsole.MarkupLine("[red]E-postadressen är redan registrerad.[/]");
+            return;
+        }
+
         var password = AnsiConsole.Prompt(
             new TextPrompt<string>("Välj ett lösenord:")
                 .PromptStyle("blue")

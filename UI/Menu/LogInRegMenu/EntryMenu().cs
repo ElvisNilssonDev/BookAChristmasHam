@@ -7,15 +7,16 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 {
 
     public class EntryMenu
-    {
-        private readonly DataStore<User> _userStore;
+    { // Visa meny för inloggning/registrering
+
         private readonly UserAccountManager _accountManager;
 
-        public EntryMenu()
-        {            
-            _userStore = new DataStore<User>(PathService.GetDataFilePath("users.json"));
-            _accountManager = new UserAccountManager(_userStore);
+        public EntryMenu(UserAccountManager accountManager)
+        {
+            _accountManager = accountManager;
         }
+
+
 
         public User? Show()
         {
@@ -29,7 +30,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                 switch (choice)
                 {
                     case "Logga in":
-                        var loginMenu = new LoginMenu(_userStore);
+                        var loginMenu = new LoginMenu(_accountManager);
                         var user = loginMenu.Prompt();
                         if (user != null)
                         {
