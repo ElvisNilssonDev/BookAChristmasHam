@@ -1,0 +1,34 @@
+[
+  {
+    "Id": 1,
+    "Name": "a",
+    "Email": "a",
+    "Password": "a",
+    "Username": null,
+    "Type": "Business"
+  },
+  {
+    "Id": 2,
+    "Name": "b",
+    "Email": "b",
+    "Password": "b",
+    "Username": null,
+    "Type": "Private"
+  },
+  {
+    "Id": 3,
+    "Name": "Elvis",
+    "Email": "@Elvis",
+    "Password": "1234",
+    "Username": null,
+    "Type": "Business"
+  },
+  {
+    "Id": 4,
+    "Name": "c",
+    "Email": "c",
+    "Password": "c",
+    "Username": null,
+    "Type": "Private"
+  }
+]

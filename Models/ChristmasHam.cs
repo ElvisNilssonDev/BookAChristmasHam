@@ -1,45 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookAChristmasHam.Interfaces;
 
 namespace BookAChristmasHam.Models
 {
-    // Klassen ChrismasHam representerar en julskinka som kan beställas av kunden
-    public class ChristmasHam
+    public class ChristmasHam : IHasId
     {
-        // Unikt id för skinkan
-        private int Id { get; set; }
-
-        // Vikten på skinkan i kg
-        public int Weight { get; set; }
-
-        // True om skinkan är inlagd
-        public bool Brined { get; set; }
-
-        // True om skinkan har ben
-        public bool HasBones { get; set; }
-
-        // True om skinkan är kokt
-        public bool IsCooked { get; set; }
-
-        // Veckonummer då de vill ha skinkan
-        public int Week { get; set; }
+        public int Id { get; set; }           // ID för skinkan
+        public int BusinessId { get; set; }   // ID för företaget som äger skinkan
+        public HamData Data { get; set; }     // Egenskaper för skinkan
 
 
         // Konstruktor som används för att skapa ett ChrismasHam objekt
         // Här skickar man in alla värden när man skapar skinkan
-        public ChristmasHam( int id, int weight, bool brined, bool hasBones, bool isCooked, int week) {
-            
+        public ChristmasHam(int id, int businessId, HamData data)
+        {
             Id = id;
-            Weight = weight;
-            Brined = brined;
-            HasBones = hasBones;
-            IsCooked = isCooked;
-            Week = week;
-
-            }
+            BusinessId = businessId;
+            Data = data;
+        }
 
 
     }

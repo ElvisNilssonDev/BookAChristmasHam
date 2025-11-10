@@ -6,9 +6,28 @@ using System.Threading.Tasks;
 
 namespace BookAChristmasHam.Models
 {
-    internal class Business : User//Arv från User-klassen
+    //internal class Business : User//Arv från User-klassen
+    //{
+    //    private int Id { get; set; }//Företagets unika "ID"
+
+
+    //    public string CompanyName { get; set; }//Företagets namn t.ex Pågen AB
+    //}
+
+    public class Business : User       
     {
-        private int Id { get; set; }//Företagets unika "ID"
-        public string CompanyName { get; set; }//Företagets namn t.ex Pågen AB
+        //private int Id { get; set; }//Företagets unika "ID". Eftersom vi använder arv, behövs inte!
+        public string CompanyName { get; set; }
+        //public string Address { get; set; }
+
+        public Business()
+        {
+            Type = UserType.Business; //  Sätts automatiskt
+        }
+
     }
+
+
+
 }
+
