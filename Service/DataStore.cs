@@ -29,7 +29,6 @@ namespace BookAChristmasHam.Service
             _filePath = filePath;
         }
 
-
         // Hämtar alla objekt från lagringen
         public IEnumerable<T> GetAll()              // IEnumerable istället för List. Mer flexibel, säkrare. Nackdel: måste skicka Tolist()
         {
@@ -39,6 +38,21 @@ namespace BookAChristmasHam.Service
         {
             return _items.FirstOrDefault(item => item.Id == id);
         }
+
+        public bool Add(T item)
+        {
+            // Kontrollera om objekt med samma Id redan finns
+            if (_items.Any(i => i.Id == item.Id))
+            {
+                return false; // förhindra dubbletter
+            }
+
+            _items.Add(item); // lägg till nytt objekt i listan
+
+            // här kan du senare lägga till Save(); för att spara till fil
+            return true;
+        }
+
         public bool Delete(int id)//ta bort objekt med angivet Id
         {
             var item = Get(id);//hitta objektet med det angivna Id
