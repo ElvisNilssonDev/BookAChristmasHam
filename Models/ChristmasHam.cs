@@ -9,19 +9,15 @@ namespace BookAChristmasHam.Models
         public HamData Data { get; set; }     // Egenskaper för skinkan
 
 
-        //// Konstruktor som används för att skapa ett ChrismasHam objekt
-        //// Här skickar man in alla värden när man skapar skinkan
-        //public ChristmasHam(int id, int weight, bool brined, bool hasBones, bool isCooked, int week) 
-        //{
+        // Konstruktor som används för att skapa ett ChrismasHam objekt
+        // Här skickar man in alla värden när man skapar skinkan
+        public ChristmasHam(int id, int businessId, HamData data)
+        {
+            Id = id;
+            BusinessId = businessId;
+            Data = data;
+        }
 
-        //    Id = id;
-        //    Weight = weight;
-        //    Brined = brined;
-        //    HasBones = hasBones;
-        //    IsCooked = isCooked;
-        //    Week = week;
-
-        //}
 
     }
 }

@@ -29,8 +29,8 @@ namespace BookAChristmasHam.Managers
         private readonly DataStore<ChristmasHam> _hamStore;
 
         // lagringsinstans (_bookingStore) för Booking. Hanterar bokningar (List<Booking> _items). Innehåller metoder från DataStore-klassen.
-        private readonly DataStore<Booking> _bookingStore;
-
+        //private readonly DataStore<Booking> _bookingStore;
+        private readonly BookingManager _bookingManager;
 
         //// KONSTRUKTOR
         //public BusinessManager(DataStore<ChristmasHam> hamStore, DataStore<Booking> bookingstore)
@@ -43,45 +43,46 @@ namespace BookAChristmasHam.Managers
         public BusinessManager(StorageService storage)
         {
             _hamStore = storage.HamStore;
-            _bookingStore = storage.BookingStore;
+            _bookingManager = new BookingManager(storage);
         }
 
         //-------------
         //Fyll på med CRUD-OPERATION 
         //-------------
 
-        // ----BokningsOperationer
-
+        //----------------------------------------------------------------------------------------------------
+        //BokningsOperationer: ALLA ORDERS KOMMER FRÅN USER-PRIVATE, OCH NU HAR USER-BUISNESS TILLGÅNG TILL DE
+        //----------------------------------------------------------------------------------------------------
 
         // Ta bort en order
         public bool DeleteOrder(int bookingId)
         {
-            var isDeleted = _bookingStore.Delete(bookingId);
-            if (isDeleted)
-            {
-                //_bookingStore.SaveToJson();
-            }
-            return isDeleted;
+            return _bookingManager.DeleteBooking(bookingId);
         }
 
 
-        // Uppdatera bokning
+        // Uppdatera order
         public bool UpdateOrder(Booking updatedBooking)
         {
-            var result = _bookingStore.Update(updatedBooking);
-            if (result)
-            {
-                //_bookingStore.SaveToJson(); // Jhon kommer lägga till denna metod (SaveToJson()) i DataStore-klassen
-            }
-            return result;
+           return _bookingManager.UpdateBooing(updatedBooking);
         }
 
 
         // FILTRERING: FILTRERAR PÅ ALLA PROPERTIES (VAR FÖR SIG) I BOOKING-ClASS.
-        public IEnumerable<Booking> Filter(Func<Booking, bool> predicate)
+        public IEnumerable<Booking> FilterOrder(Func<Booking, bool> predicate)
         {
-            return _bookingStore.GetAll().Where(predicate);
+            return _bookingManager.Filter(predicate);
         }
+
+        // Företaget anger businessId, och ser bokningar som alla user-Private har lagt via UserManager BookHam
+        public IEnumerable<Booking> GetMyOrders(int businessId)
+        {
+            return _bookingManager.GetBookingsByBusinessId(businessId);
+        }
+
+
+
+
 
         // ----HamOperationer
 
@@ -97,7 +98,7 @@ namespace BookAChristmasHam.Managers
         //-optional, E.X. FÖRETAGET VILL MODIFFIERA DÅ KAN VI TA TILL CRUD-FUNKTIONER 
 
         // LÄGG TILL HAM,
-        public void AddHam(ChristmasHam ham) 
+        public void AddHam(ChristmasHam ham)
         {
             _hamStore.Add(ham);
             _hamStore.SaveToJson();
@@ -106,14 +107,14 @@ namespace BookAChristmasHam.Managers
 
 
         // TA BORT HAM
-        public void DeleteHam(int hamId) 
+        public void DeleteHam(int hamId)
         {
             _hamStore.Delete(hamId);
             _hamStore.SaveToJson();
         }
 
 
-       
+
 
 
 

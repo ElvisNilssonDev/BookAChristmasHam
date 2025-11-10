@@ -17,13 +17,15 @@ class Program
         var accountManager = new UserAccountManager(storage); // Hanterar användarlogik
         var entryMenu = new EntryMenu(accountManager); // Startmeny för inloggning/registrering
 
+        var userManager = new UserManager(storage); 
+
         var user = entryMenu.Show(); // Visar meny och returnerar inloggad användare
 
-        if (user == null)
-        {
-            // Programmet avslutas av användaren
-            return;
-        }
+        //if (user == null)
+        //{
+        //    // Programmet avslutas av användaren
+        //    return;
+        //}
 
         //if (user.Type == UserType.Business)
         //{
@@ -32,7 +34,7 @@ class Program
         //}
         //else
         //{
-        //    var privateMenu = new PrivateMenu(User user, UserManager userManager); // Meny för privat användare
+        //    var privateMenu = new PrivateMenu(user,userManager); // Meny för privat användare
         //    privateMenu.Show();
         //}
 
@@ -64,17 +66,5 @@ class Program
         //entryMenu.Show();
 
 
-
-
-
-
-        // 
-        //// Registrera ny användare
-        //var register = new Register(accountManager);
-        //register.Prompt();
-
-        //// Logga in efteråt
-        //var login = new Login(userStore);
-        //var user = login.Prompt();
     }
 }

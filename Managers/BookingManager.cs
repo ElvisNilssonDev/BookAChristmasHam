@@ -11,14 +11,14 @@ namespace BookAChristmasHam.Managers
         private readonly DataStore<Booking> _bookingStore;
 
         // 
-        public BookingManager(DataStore<Booking> bookingStore)
+        public BookingManager(StorageService storage)
         {
-            _bookingStore = bookingStore;
+            _bookingStore = storage.BookingStore;
         }
 
 
         // lägg/skapa en bokning (Create)
-        public void AddOrder(Booking booking)
+        public void AddBooking(Booking booking)
         {
             _bookingStore.Add(booking);            // NATALIE FIXA EN Add() metod i DATASTORE
             _bookingStore.SaveToJson();            //JHON FIXAR EN SaveToJson() METOD I DATASTORE
@@ -26,7 +26,7 @@ namespace BookAChristmasHam.Managers
 
 
         // Ta bort en order
-        public bool DeleteOrder(int bookingId)
+        public bool DeleteBooking(int bookingId)
         {
             var isDeleted = _bookingStore.Delete(bookingId);
             if (isDeleted)
@@ -38,7 +38,7 @@ namespace BookAChristmasHam.Managers
 
 
         // Uppdatera bokning
-        public bool UpdateOrder(Booking updatedBooking)
+        public bool UpdateBooing(Booking updatedBooking)
         {
             var result = _bookingStore.Update(updatedBooking);
             if (result)
@@ -55,8 +55,18 @@ namespace BookAChristmasHam.Managers
             return _bookingStore.GetAll().Where(predicate);
         }
 
+        // ALLA BOKNIGAR från USER-Private(s) FÖR ALLA businessId(ers), EFTERSOM USER-BUISNESS(es) KAN INTE LÄGGA ORDER, SE USERMANAGER
+        public IEnumerable<Booking> GetAllBookings()
+        {
+            return _bookingStore.GetAll();
+        }
 
-
+        // Bokningar för ett företag via businessId
+        public IEnumerable<Booking> GetBookingsByBusinessId(int businessId)
+        {
+            return _bookingStore.GetAll()                   // hämtar alla bokningar
+                .Where(b => b.BusinessId == businessId);    // filtrerar bokningar baserat på BusinessId
+        }
 
 
     }

@@ -12,13 +12,15 @@ namespace BookAChristmasHam.Managers
         private readonly DataStore<ChristmasHam> _hamStore;
 
         // HÄMTAR BOKNINGAR SOM HANTERAS AV BookingManager MEN FINNS I _bookingManager
+       // private readonly DataStore<Booking> _bookingstore;
+
         private readonly BookingManager _bookingManager;
 
         // KONSTROKTUR
-        public UserManager(DataStore<ChristmasHam> hamStore, BookingManager bookingManager)
+        public UserManager(StorageService storage)
         {
-            _hamStore = hamStore;
-            _bookingManager = bookingManager;
+            _hamStore = storage.HamStore;
+            _bookingManager = new BookingManager(storage);
         }
 
         // VISAR ALLA HAMS TILL USER-PRIVATE (P)
@@ -46,7 +48,7 @@ namespace BookAChristmasHam.Managers
                 BusinessId = ham.BusinessId // varje ham ägs av ett unik företag
             };
 
-            _bookingManager.AddOrder(booking); // ORDER LÄGGS FÖR user-P
+            _bookingManager.AddBooking(booking); // ORDER LÄGGS FÖR user-P
             AnsiConsole.MarkupLine("[green] Bokningen är genomförd![/]");
         }
 
