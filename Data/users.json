@@ -14,5 +14,21 @@
     "Password": "b",
     "Username": null,
     "Type": "Private"
+  },
+  {
+    "Id": 3,
+    "Name": "Elvis",
+    "Email": "@Elvis",
+    "Password": "1234",
+    "Username": null,
+    "Type": "Business"
+  },
+  {
+    "Id": 4,
+    "Name": "c",
+    "Email": "c",
+    "Password": "c",
+    "Username": null,
+    "Type": "Private"
   }
 ]
