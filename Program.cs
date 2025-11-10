@@ -11,23 +11,32 @@ class Program
     static void Main(string[] args)
     {
 
-        //// sök väg för json-filen. Skapar mappen (Data) om den inte finns.
-        //var usersFilePath = PathService.GetDataFilePath("users.json");
 
-        //// skapa lagring för users
-        //var userStore = new DataStore<User>(usersFilePath);
 
-        //// skapa en user hanterare och ladda in users 
-        //var accountManager = new UserAccountManager(userStore);
+        var storage = new StorageService(); // Initierar lagringstjänst
+        var accountManager = new UserAccountManager(storage); // Hanterar användarlogik
+        var entryMenu = new EntryMenu(accountManager); // Startmeny för inloggning/registrering
 
-        //// visa alla users
-        //accountManager.
+        var user = entryMenu.Show(); // Visar meny och returnerar inloggad användare
 
-        var storage = new StorageService();
-        var accountManager = new UserAccountManager(storage);
+        if (user == null)
+        {
+            // Programmet avslutas av användaren
+            return;
+        }
 
-        var entryMenu = new EntryMenu(accountManager);
-        var user = entryMenu.Show();
+        //if (user.Type == UserType.Business)
+        //{
+        //    var businessMenu = new BusinessMenu((Business)user); // Meny för företagsanvändare
+        //    businessMenu.Show();
+        //}
+        //else
+        //{
+        //    var privateMenu = new PrivateMenu(User user, UserManager userManager); // Meny för privat användare
+        //    privateMenu.Show();
+        //}
+
+
 
 
         // kalla på Account manager

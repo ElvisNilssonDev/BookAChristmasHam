@@ -4,12 +4,12 @@ using Spectre.Console;
 
 namespace BookAChristmasHam.UI.Menu.UserMenus
 {
-    public class PrivateUserMenu
+    public class PrivateMenu
     {
         private readonly User _user;
         private readonly UserManager _userManager;
 
-        public PrivateUserMenu(User user, UserManager userManager)
+        public PrivateMenu(User user, UserManager userManager)
         {
             _user = user;
             _userManager = userManager;
