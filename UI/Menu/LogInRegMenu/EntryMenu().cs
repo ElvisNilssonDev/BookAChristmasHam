@@ -12,12 +12,14 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         private readonly UserAccountManager _accountManager;
 
+        
         public EntryMenu(UserAccountManager accountManager)
         {
             _accountManager = accountManager;
         }
 
         private readonly PrivateMenu privateMenu = new PrivateMenu();
+        private readonly BusinessMenu businessMenu = new BusinessMenu();
 
 
 
@@ -25,6 +27,11 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
         {
             while (true)
             {
+                AnsiConsole.Clear();
+                AnsiConsole.Write(
+                new FigletText("Book A Christmas Ham!")
+                .Centered()
+                .Color(Color.Green3));
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("[bold]Choose an option:[/]")
@@ -37,9 +44,8 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                         var user = loginMenu.Prompt();
                         if (user != null)
                         {
-                            AnsiConsole.MarkupLine($"[green]Logged in as {user.Name} ({user.Type})[/]");
-                            privateMenu.ShowPriv(user);
-                            return user;
+                                var privateMenu = new PrivateMenu();
+                                privateMenu.ShowPriv(user); // Regular user menu
                         }
                         break;
 

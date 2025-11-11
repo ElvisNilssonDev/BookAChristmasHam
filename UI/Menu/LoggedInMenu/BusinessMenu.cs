@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
-    internal class BusinessMenu
+    public class BusinessMenu
     {
+        public void Show()
+        {
+            Console.WriteLine("Business Menu - Functionality coming soon!");
+        }
     }
 }
