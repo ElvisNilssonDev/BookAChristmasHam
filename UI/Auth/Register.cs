@@ -18,26 +18,26 @@ namespace BookAChristmasHam.UI.Authors
 
         public void Prompt()
         {
-            AnsiConsole.MarkupLine("[bold underline]Registrera ny användare[/]");
+            AnsiConsole.MarkupLine("[bold underline]Register new user.[/]");
 
-            var name = AnsiConsole.Ask<string>("Ange ditt namn:");
-            var email = AnsiConsole.Ask<string>("Ange din e-post:");
+            var name = AnsiConsole.Ask<string>("Enter your name:");
+            var email = AnsiConsole.Ask<string>("Enter your email:");
 
             if (_accountManager.EmailExists(email))
             {
-                AnsiConsole.MarkupLine("[red]E-postadressen är redan registrerad.[/]");
+                AnsiConsole.MarkupLine("[red]The email address is already registered.[/]");
                 return;
             }
 
             var password = AnsiConsole.Prompt(
-                new TextPrompt<string>("Ange ett lösenord:")
+                new TextPrompt<string>("Choose a password.")
                     .PromptStyle("blue")
                     .Secret()
             );
 
             var type = AnsiConsole.Prompt(
                 new SelectionPrompt<UserType>()
-                    .Title("Välj användartyp:")
+                    .Title("Select account type:")
                     .AddChoices(UserType.Private, UserType.Business)
             );
 
@@ -51,7 +51,7 @@ namespace BookAChristmasHam.UI.Authors
 
             _accountManager.Register(user); // skicka in till register som finns i Login
             _accountManager.Save(); // spara 
-            AnsiConsole.MarkupLine("[green]Registreringen lyckades! Du kan nu logga in.[/]");
+            AnsiConsole.MarkupLine("[green]Registration successful! You can now log in.[/]");
         }
 
     }//end class

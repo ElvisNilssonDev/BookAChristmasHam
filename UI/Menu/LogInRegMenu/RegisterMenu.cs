@@ -16,26 +16,26 @@ public class RegisterMenu
 
     public void Prompt()
     {
-        AnsiConsole.MarkupLine("[bold underline]Registrera ny användare[/]");
+        AnsiConsole.MarkupLine("[bold underline]Register new user[/]");
 
-        var name = AnsiConsole.Ask<string>("Ange ditt namn:");
-        var email = AnsiConsole.Ask<string>("Ange din e-post:");
+        var name = AnsiConsole.Ask<string>("Enter your name:");
+        var email = AnsiConsole.Ask<string>("Enter your email:");
 
         if (_accountManager.EmailExists(email))
         {
-            AnsiConsole.MarkupLine("[red]E-postadressen är redan registrerad.[/]");
+            AnsiConsole.MarkupLine("[red]The email address is already registered.[/]");
             return;
         }
 
         var password = AnsiConsole.Prompt(
-            new TextPrompt<string>("Välj ett lösenord:")
+            new TextPrompt<string>("Choose a password:")
                 .PromptStyle("blue")
                 .Secret()
         );
 
         var type = AnsiConsole.Prompt(
             new SelectionPrompt<UserType>()
-                .Title("Välj användartyp:")
+                .Title("Select account type:")
                 .AddChoices(UserType.Private, UserType.Business)
         );
 
@@ -43,11 +43,11 @@ public class RegisterMenu
 
         if (type == UserType.Business)
         {
-            var companyName = AnsiConsole.Ask<string>("Ange företagsnamn:");
+            var companyName = AnsiConsole.Ask<string>("Enter company name:");
 
             if (string.IsNullOrWhiteSpace(companyName))
             {
-                AnsiConsole.MarkupLine("[red]Företagsnamn krävs för Business-användare.[/]");
+                AnsiConsole.MarkupLine("[red]Company name is required for business users.[/]");
                 return;
             }
 
@@ -72,6 +72,6 @@ public class RegisterMenu
 
         _accountManager.Register(newUser);
         _accountManager.Save(); 
-        AnsiConsole.MarkupLine("[green]Registrering lyckades![/]");
+        AnsiConsole.MarkupLine("[green]Registration successful![/]");
     }
 }

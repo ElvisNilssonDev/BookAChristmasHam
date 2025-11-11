@@ -19,11 +19,11 @@ namespace BookAChristmasHam.UI.Authors
 
         public User? Prompt() // fråga efter user info, rega ny användare 
         {
-            AnsiConsole.MarkupLine("[bold underline]Logga in[/]");
+            AnsiConsole.MarkupLine("[bold underline]Log in[/]");
 
-            var email = AnsiConsole.Ask<string>("Ange din e-post:");
+            var email = AnsiConsole.Ask<string>("Enter your email:");
             var password = AnsiConsole.Prompt(
-                new TextPrompt<string>("Ange ditt lösenord:")
+                new TextPrompt<string>("Enter your password:")
                     .PromptStyle("blue")
                     .Secret()
             );
@@ -35,11 +35,11 @@ namespace BookAChristmasHam.UI.Authors
 
             if (user == null)
             {
-                AnsiConsole.MarkupLine("[red]Felaktiga inloggningsuppgifter.[/]");
+                AnsiConsole.MarkupLine("[red]Incorrect login credentials. Try again![/]");
                 return null;
             }
 
-            AnsiConsole.MarkupLine($"[green]Välkommen, {user.Name}![/]");
+            AnsiConsole.MarkupLine($"[green]Welcome, {user.Name}![/]");
             return user; // skickar ut user info
         }
     }

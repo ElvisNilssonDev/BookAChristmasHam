@@ -24,28 +24,28 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
             {
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
-                        .Title("[bold]Välj ett alternativ:[/]")
-                        .AddChoices("Logga in", "Registrera ny användare", "Avsluta"));
+                        .Title("[bold]Choose an option:[/]")
+                        .AddChoices("Log in", "Register new user", "Exit"));
 
                 switch (choice)
                 {
-                    case "Logga in":
+                    case "Log in":
                         var loginMenu = new LoginMenu(_accountManager);
                         var user = loginMenu.Prompt();
                         if (user != null)
                         {
-                            AnsiConsole.MarkupLine($"[green]Inloggad som {user.Name} ({user.Type})[/]");
+                            AnsiConsole.MarkupLine($"[green]Logged in as {user.Name} ({user.Type})[/]");
                             return user;
                         }
                         break;
 
-                    case "Registrera ny användare":
+                    case "Register new user":
                         var registerMenu = new RegisterMenu(_accountManager);
                         registerMenu.Prompt();
                         break;
 
-                    case "Avsluta":
-                        AnsiConsole.MarkupLine("[yellow]Programmet avslutas...[/]");
+                    case "Exit":
+                        AnsiConsole.MarkupLine("[yellow]The program is exiting...[/]");
                         return null;
                 }
             }

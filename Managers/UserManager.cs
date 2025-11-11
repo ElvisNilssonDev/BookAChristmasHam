@@ -34,7 +34,7 @@ namespace BookAChristmasHam.Managers
         {
             if (user.Type == UserType.Business)
             {
-                AnsiConsole.MarkupLine("[red]Företag kan inte boka skinkor.[/]");
+                AnsiConsole.MarkupLine("[red]Companies cannot book hams.[/]");
                 return;
             }
 
@@ -49,7 +49,7 @@ namespace BookAChristmasHam.Managers
             };
 
             _bookingManager.AddBooking(booking); // ORDER LÄGGS FÖR user-P
-            AnsiConsole.MarkupLine("[green] Bokningen är genomförd![/]");
+            AnsiConsole.MarkupLine("[green]The booking is complete![/]");
         }
 
     }

@@ -19,7 +19,7 @@ namespace BookAChristmasHam.Service
 
             if (!File.Exists(filePath))
             {
-                AnsiConsole.MarkupLine($"[yellow]Filen hittades inte:[/] {displayPath}");
+                AnsiConsole.MarkupLine($"[yellow]The file cannot be found:[/] {displayPath}");
                 return new List<T>();
             }
 
@@ -53,7 +53,7 @@ namespace BookAChristmasHam.Service
             File.WriteAllText(filePath, json); //skriver över filen (fast det gammla ta inte bort!)
 
             // visar feedback 
-            AnsiConsole.MarkupLine($"[green]Data sparad i fil:[/] {displayPath}");
+            AnsiConsole.MarkupLine($"[green]Data saved in file:[/] {displayPath}");
 
 
             // fixar till try catch senare med feedback till användaren
