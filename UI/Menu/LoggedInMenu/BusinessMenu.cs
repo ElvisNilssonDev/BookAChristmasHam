@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookAChristmasHam.Models;
+using Spectre.Console;
 
 //ShowAllHam()
 //DeleteOrder()
@@ -13,30 +14,32 @@ using BookAChristmasHam.Models;
 
 namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
-    internal class BusinessMenu
+    public class BusinessMenu
     {
         public void DisplayBusinessMenu(Business businessUser)
         {
-            bool isRunning = true;
-
-            while (isRunning)
+            bool runningbusiness = true;
+            while (runningbusiness)
             {
                 Console.Clear();
-                Console.WriteLine("=== Business Menu ===");
-                Console.WriteLine("1. Show all orders");
-                Console.Write("Choose a option: ");
-
-                string choice = Console.ReadLine();
-
+                // Visar meny för företagsanvändare
+                AnsiConsole.MarkupLine($"[bold]Welcome, {businessUser.CompanyName}![/]");
+                var choice = AnsiConsole.Ask<int>(":");
                 switch (choice)
                 {
-                    case "1":
-                        //ShowAllHam();
-                        Console.WriteLine("Show all orders selected.");
+                    case 1:
+                        // Visa mina bokningar
+                        AnsiConsole.MarkupLine("[blue]Show all ham[/]");
+                        AnsiConsole.MarkupLine("Tryck på valfri tangent för att fortsätta...");
+                        Console.ReadKey();
+                        break;
+                    case 2:
+                        runningbusiness = false; // Exit the loop
                         break;
                 }
+
             }
         }
     }
-
 }
+

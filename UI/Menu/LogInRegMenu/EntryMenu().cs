@@ -18,6 +18,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
         }
 
         private readonly PrivateMenu privateMenu = new PrivateMenu();
+        private readonly BusinessMenu businessMenu = new BusinessMenu();
 
 
 
@@ -35,11 +36,20 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                     case "Log in":
                         var loginMenu = new LoginMenu(_accountManager);
                         var user = loginMenu.Prompt();
+
                         if (user != null)
                         {
-                            AnsiConsole.MarkupLine($"[green]Logged in as {user.Name} ({user.Type})[/]");
-                            privateMenu.ShowPriv(user);
-                            return user;
+                            if (user is Business businessUser)
+                            {
+                                var businessMenu = new BusinessMenu();
+                                businessMenu.DisplayBusinessMenu(businessUser);
+                                return user;
+                            }
+                            if (user != null && user is not Business)
+                            {
+                                var privateMenu = new PrivateMenu();
+                                privateMenu.ShowPriv(user);
+                            }
                         }
                         break;
 

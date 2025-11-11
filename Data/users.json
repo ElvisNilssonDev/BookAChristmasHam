@@ -54,5 +54,29 @@
     "Password": "Minion89",
     "Username": null,
     "Type": "Private"
+  },
+  {
+    "Id": 8,
+    "Name": "111",
+    "Email": "111@gmail.com",
+    "Password": "111",
+    "Username": null,
+    "Type": "Business"
+  },
+  {
+    "Id": 9,
+    "Name": "122",
+    "Email": "122@gmail.com",
+    "Password": "122",
+    "Username": null,
+    "Type": "Private"
+  },
+  {
+    "Id": 10,
+    "Name": "132",
+    "Email": "132@gmail.com",
+    "Password": "132",
+    "Username": null,
+    "Type": "Business"
   }
 ]
