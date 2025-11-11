@@ -1,6 +1,7 @@
 ﻿using BookAChristmasHam.Managers;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Service;
+using BookAChristmasHam.UI.Menu.LoggedInMenu;
 using Spectre.Console;
 
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu
@@ -43,6 +44,6 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
             
 
             return user;
-        }
+        }       
     }
 }
