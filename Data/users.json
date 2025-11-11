@@ -94,5 +94,13 @@
     "Password": "a",
     "Username": null,
     "Type": "Private"
+  },
+  {
+    "Id": 13,
+    "Name": "qw",
+    "Email": "qw@gmail.com",
+    "Password": "qw",
+    "Username": null,
+    "Type": "Business"
   }
 ]
