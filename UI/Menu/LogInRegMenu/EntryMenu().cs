@@ -1,7 +1,8 @@
-﻿using Spectre.Console;
+﻿using BookAChristmasHam.Managers;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Service;
-using BookAChristmasHam.Managers;
+using BookAChristmasHam.UI.Menu.LoggedInMenu;
+using Spectre.Console;
 
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 {
@@ -15,6 +16,8 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
         {
             _accountManager = accountManager;
         }
+
+        private readonly PrivateMenu privateMenu = new PrivateMenu();
 
 
 
@@ -35,6 +38,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                         if (user != null)
                         {
                             AnsiConsole.MarkupLine($"[green]Logged in as {user.Name} ({user.Type})[/]");
+                            privateMenu.ShowPriv(user);
                             return user;
                         }
                         break;
