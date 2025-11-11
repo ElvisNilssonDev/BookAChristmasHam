@@ -1,6 +1,4 @@
-﻿
-
-using BookAChristmasHam.Models;
+﻿using BookAChristmasHam.Models;
 using BookAChristmasHam.Service;
 
 namespace BookAChristmasHam.Managers
@@ -32,7 +30,25 @@ namespace BookAChristmasHam.Managers
         // checka user-info
         public User? Authenticate(string email, string password)
         {
-            return _userStore.GetAll().FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = _userStore.GetAll().FirstOrDefault(u => u.Email == email && u.Password == password);
+            
+            if (user != null && user.Type == UserType.Business)
+            {
+                // Konvertera till Business-objekt (annars blev det bara en User med Type = Business, så business menyn funkar inte)
+                var business = new Business
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password,
+                    Username = user.Username,
+                    Type = user.Type,
+                    CompanyName = (user as Business)?.CompanyName ?? ""
+                };
+                return business;
+            }
+            
+            return user;
         }
 
         // Skapa (add) ny användare

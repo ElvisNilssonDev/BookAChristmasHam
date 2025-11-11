@@ -42,10 +42,19 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                     case "Log in":
                         var loginMenu = new LoginMenu(_accountManager);
                         var user = loginMenu.Prompt();
+
                         if (user != null)
                         {
+                            if (user is Business businessUser)
+                            {
+                                var businessMenu = new BusinessMenu();
+                                businessMenu.DisplayBusinessMenu(businessUser);
+                            }
+                             else if (user is not Business)
+                            {
                                 var privateMenu = new PrivateMenu();
-                                privateMenu.ShowPriv(user); // Regular user menu
+                                privateMenu.ShowPriv(user);
+                            }
                         }
                         break;
 

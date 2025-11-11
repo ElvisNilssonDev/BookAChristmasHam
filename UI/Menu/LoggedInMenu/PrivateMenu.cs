@@ -16,38 +16,20 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 
             while (runningpriv)
             {
-                AnsiConsole.Clear();
-                AnsiConsole.Write(
-                new FigletText("ChristmasHam!")
-                .Centered()
-                .Color(Color.Red));
-                var choice = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                .Title("[green]Select an option:[/]")
-                .PageSize(10)
-                .AddChoices(new[]
-                {
-                    "Order ChristmasHam",
-                    "See Your Order",
-                    "Logout"
-                }));
 
-                AnsiConsole.MarkupLine($"You selected: [yellow]{choice}[/]");
-                switch (choice)
-                {
-                    case "Order ChristmasHam":
-                        // Visa mina bokningar
+                      // Visa mina bokningar
                         AnsiConsole.MarkupLine("[blue]Visa mina bokningar - Funktionalitet kommer snart![/]");
                         AnsiConsole.MarkupLine("Tryck på valfri tangent för att fortsätta...");
                         Console.ReadKey();
                         break;
-                    case "See Your Order":
+
+
                         // Ta bort en bokning
                         AnsiConsole.MarkupLine("[blue]Ta bort en bokning - Funktionalitet kommer snart![/]");
                         AnsiConsole.MarkupLine("Tryck på valfri tangent för att fortsätta...");
                         Console.ReadKey();
                         break;
-                    case "Logout":
+
                         // Logga ut
                         runningpriv = false;
                         AnsiConsole.MarkupLine("[green]You have logged out! See you soon!.[/]");
