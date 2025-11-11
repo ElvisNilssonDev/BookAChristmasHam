@@ -40,6 +40,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                 AnsiConsole.MarkupLine("[red]Invalid business user – missing company name.[/]");
                 return null;
             }
+            
 
             return user;
         }
