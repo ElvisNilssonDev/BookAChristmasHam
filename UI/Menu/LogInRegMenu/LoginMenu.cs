@@ -17,11 +17,11 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         public User? Prompt()
         {
-            AnsiConsole.MarkupLine("[bold underline]Logga in[/]");
+            AnsiConsole.MarkupLine("[bold underline]Log in[/]");
 
-            var email = AnsiConsole.Ask<string>("Ange din e-post:");
+            var email = AnsiConsole.Ask<string>("Enter your email:");
             var password = AnsiConsole.Prompt(
-                new TextPrompt<string>("Ange ditt lösenord:")
+                new TextPrompt<string>("Enter your password:")
                     .PromptStyle("blue")
                     .Secret()
             );
@@ -30,14 +30,14 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
             if (user == null)
             {
-                AnsiConsole.MarkupLine("[red]Felaktiga inloggningsuppgifter.[/]");
+                AnsiConsole.MarkupLine("[red]Incorrect login credentials.[/]");
                 return null;
             }
 
             // Validera företagsanvändare
             if (user is Business businessUser && string.IsNullOrWhiteSpace(businessUser.CompanyName))
             {
-                AnsiConsole.MarkupLine("[red]Ogiltig företagsanvändare – saknar företagsnamn.[/]");
+                AnsiConsole.MarkupLine("[red]Invalid business user – missing company name.[/]");
                 return null;
             }
 
