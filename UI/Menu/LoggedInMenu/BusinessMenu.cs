@@ -23,38 +23,50 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
             {
                 Console.Clear();
                 // Visar meny för företagsanvändare
-                AnsiConsole.MarkupLine($"[bold]Welcome, {businessUser.CompanyName}![/]");
-                AnsiConsole.MarkupLine("[yellow]--- Business menu ---[/]");
-                AnsiConsole.MarkupLine("[green]1.[/] Show all orders");
-                AnsiConsole.MarkupLine("[green]2.[/] Delete an order");
-                AnsiConsole.MarkupLine("[green]2.[/] Filter orders");
-                AnsiConsole.MarkupLine("[green]2.[/] Update an order");
-                AnsiConsole.MarkupLine("[green]0.[/] Log out");
-                AnsiConsole.MarkupLine("---------------------");
-                var choice = AnsiConsole.Ask<int>(":");
+                AnsiConsole.Write(
+                new FigletText("ChristmasHam!")
+                .Centered()
+                .Color(Color.Red));
+                AnsiConsole.Write(
+                new FigletText("Business")
+                .Centered()
+                .Color(Color.Green));
+                var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("[green]Select an option:[/]")
+                .PageSize(10)
+                .AddChoices(new[]
+                {
+                    "Show all orders",
+                    "Delete an order",
+                    "Filter orders",
+                    "Update an order",
+                    "Logout"
+                }));
+                AnsiConsole.MarkupLine($"You selected: [yellow]{choice}[/]");
                 switch (choice)
                 {
-                    case 1:
+                    case "Show all orders":
                         AnsiConsole.MarkupLine("[blue]ShowAllHam()...[/]");
                         AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
-                    case 2:
+                    case "Delete an order":
                         AnsiConsole.MarkupLine("[blue]DeleteOrder()...[/]");
                         AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
-                    case 3:
+                    case "Filter orders":
                         AnsiConsole.MarkupLine("[blue]FilterOrder()...[/]");
                         AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
-                    case 4:
+                    case "Update an order":
                         AnsiConsole.MarkupLine("[blue]UppdateOrder()...[/]");
                         AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
-                    case 0:
+                    case "Logout":
                         runningbusiness = false; // Exit the loop
                         break;
                 }
