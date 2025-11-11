@@ -33,9 +33,9 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                 .Centered()
                 .Color(Color.Green3));
                 var choice = AnsiConsole.Prompt(
-                    new SelectionPrompt<string>()
-                        .Title("[bold]Choose an option:[/]")
-                        .AddChoices("Log in", "Register new user", "Exit"));
+                new SelectionPrompt<string>()
+                .Title("[bold]Choose an option:[/]")
+                .AddChoices("Log in", "Register new user", "Exit"));
 
                 switch (choice)
                 {
