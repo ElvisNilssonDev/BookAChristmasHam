@@ -54,5 +54,29 @@
     "Password": "Minion89",
     "Username": null,
     "Type": "Private"
+  },
+  {
+    "Id": 8,
+    "Name": "nevaljao994@gmail.com",
+    "Email": "nevaljao994@gmail.com",
+    "Password": "NemoProblemo",
+    "Username": null,
+    "Type": "Business"
+  },
+  {
+    "Id": 9,
+    "Name": "uwu",
+    "Email": "uwu@",
+    "Password": "mi",
+    "Username": null,
+    "Type": "Business"
+  },
+  {
+    "Id": 10,
+    "Name": "dadir",
+    "Email": "dadirhashi@gmai.com",
+    "Password": "Daadir123",
+    "Username": null,
+    "Type": "Business"
   }
 ]
