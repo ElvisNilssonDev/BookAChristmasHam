@@ -22,6 +22,8 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         public User? Show()
         {
+            Thread.Sleep(1000);
+
             while (true)
             {
                 AnsiConsole.Clear();
