@@ -15,8 +15,6 @@ namespace BookAChristmasHam.Service
             //  relative sökväg för bättre läsbarhet, kan man ändra senare
             var displayPath = PathService.GetRelativePath(filePath);
 
-
-
             if (!File.Exists(filePath))
             {
                 AnsiConsole.MarkupLine($"[yellow]The file cannot be found:[/] {displayPath}");
@@ -32,9 +30,7 @@ namespace BookAChristmasHam.Service
             return items ?? new List<T>(); // kollar om items är null, returnerar tom lista om så är fallet
 
             // fixar till try catch senare med feedback till användaren
-
         }
-
         public static void SaveToJsonFile<T>(List<T> items, string filePath)
         {
             var displayPath = PathService.GetRelativePath(filePath);
@@ -54,12 +50,8 @@ namespace BookAChristmasHam.Service
 
             // visar feedback 
             AnsiConsole.MarkupLine($"[green]Data saved in file:[/] {displayPath}");
-
-
             // fixar till try catch senare med feedback till användaren
         }
 
     } // end of class
-
-
 }

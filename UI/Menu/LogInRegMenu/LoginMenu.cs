@@ -10,12 +10,10 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
     { //Hantera inloggning	
 
         private readonly UserAccountManager _accountManager;
-
         public LoginMenu(UserAccountManager accountManager)
         {
             _accountManager = accountManager;
         }
-
         public User? Prompt()
         {
             while (true) // Keep asking until login succeeds or user chooses to cancel

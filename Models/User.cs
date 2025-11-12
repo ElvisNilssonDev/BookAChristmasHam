@@ -24,7 +24,4 @@ namespace BookAChristmasHam.Models
         Private,
         Business
     }
-
-
-
 }

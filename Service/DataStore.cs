@@ -29,20 +29,15 @@ namespace BookAChristmasHam.Service
         {
             _filePath = filePath;
         }
-
-
         // Hämtar alla objekt från lagringen
         public IEnumerable<T> GetAll()              // IEnumerable istället för List. Mer flexibel, säkrare. Nackdel: måste skicka Tolist()
         {
             return _items;
         }
-
-
         public T? Get(int id)
         {
             return _items.FirstOrDefault(item => item.Id == id);
         }
-
         public bool Delete(int id)//ta bort objekt med angivet Id
         {
             var item = Get(id);//hitta objektet med det angivna Id
@@ -54,8 +49,6 @@ namespace BookAChristmasHam.Service
             }
             return false;//om objektet inte hittades
         }
-
-
         public bool Update(T item)//uppdatera objekt med angivet Id
         {
             var index = _items.FindIndex(i => i.Id == item.Id);//hitta index för objektet som ska uppdateras
@@ -67,29 +60,21 @@ namespace BookAChristmasHam.Service
             }
             return false;//om objektet inte hittades
         }
-
-
         // ELVIS, FIXAR GetNextId() METODEN SOM SKA IN I DATASTORE<T> ska in i Add()-metoden
-
-
         public void SaveToJson()
         {
             JsonService.SaveToJsonFile(_items, _filePath);
         }
-
         public void LoadFromJson()
         {
             _items = JsonService.ReadFromJsonFile<T>(_filePath);
         }
-
-
         // Create
         public void Add(T item)
         {
             item.Id = GetNextId(); // sätt unikt id varje gång du skapar en item.
             _items.Add(item);
         }
-
         // ger nästa lediga id för ett nytt objekt
         public int GetNextId()
         {
@@ -98,7 +83,6 @@ namespace BookAChristmasHam.Service
 
             return _items.Max(i => i.Id) + 1; // annars, hitta högsta id och lägg till 1
         }
-
 
     } // end class
 }

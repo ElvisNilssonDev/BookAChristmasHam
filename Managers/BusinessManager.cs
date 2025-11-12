@@ -64,7 +64,7 @@ namespace BookAChristmasHam.Managers
         // Uppdatera order
         public bool UpdateOrder(Booking updatedBooking)
         {
-           return _bookingManager.UpdateBooing(updatedBooking);
+           return _bookingManager.UpdateBooking(updatedBooking);
         }
 
 
