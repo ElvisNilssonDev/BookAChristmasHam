@@ -1,65 +1,112 @@
 ﻿using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using BookAChristmasHam.UI.Helper;
 using Spectre.Console;
 
 namespace BookAChristmasHam.Service
 {
     public static class JsonService
     {
-        // Generisk JsonService klass för hantering av JSON-data.
+        // Generisk JsonService-klass för hantering av JSON-data
 
-        // statick generisk metod för att läsa JSON-data från fil
+        // Statisk generisk metod för att läsa JSON-data från fil
         public static List<T> ReadFromJsonFile<T>(string filePath)
         {
-            //  relative sökväg för bättre läsbarhet, kan man ändra senare
+            // Relativ sökväg för bättre läsbarhet, kan ändras senare
             var displayPath = PathService.GetRelativePath(filePath);
 
+            List<T> items = new(); // Förbered lista att fylla med data
 
-
-            if (!File.Exists(filePath))
+            // Visar spinner medan data laddas
+            LoadingUI.RunWithSpinner($"Laddar data från: {displayPath}", () =>
             {
-                AnsiConsole.MarkupLine($"[yellow]The file cannot be found:[/] {displayPath}");
-                return new List<T>();
-            }
+                // Kontrollera om filen finns, om inte skapa tom JSON-array
+                if (!File.Exists(filePath))
+                {
+                    File.WriteAllText(filePath, "[]");
+                    AnsiConsole.MarkupLine($"[yellow]File not found:[/] {displayPath}");
+                    items = new List<T>(); // Returnera tom lista
+                    return;
+                }
 
-            // läs JSON-innehållet från filen
-            var json = File.ReadAllText(filePath);
+                try
+                {
+                    // Läs JSON-innehållet från filen
+                    var json = File.ReadAllText(filePath);
 
-            // deserialisera JSON till lista av objekt av typ T
-            var items = JsonSerializer.Deserialize<List<T>>(json);
+                    // Kontrollera om filen är tom
+                    if (string.IsNullOrWhiteSpace(json))
+                    {
+                        AnsiConsole.MarkupLine($"[yellow]File is empty:[/] {displayPath}");
+                        items = new List<T>(); // Returnera tom lista
+                        return;
+                    }
 
-            return items ?? new List<T>(); // kollar om items är null, returnerar tom lista om så är fallet
+                    // Försök deserialisera JSON till lista av objekt av typ T
+                    var deserialized = JsonSerializer.Deserialize<List<T>>(json);
 
-            // fixar till try catch senare med feedback till användaren
+                    // Kontrollera om deserialiseringen misslyckades
+                    if (deserialized == null)
+                    {
+                        AnsiConsole.MarkupLine($"[red]Could not parse JSON format:[/] {displayPath}");
+                        items = new List<T>(); // Returnera tom lista
+                        return;
+                    }
+
+                    items = deserialized; // Sätt laddade objekt
+                }
+                catch (Exception ex)
+                {
+                    // Fel vid läsning av JSON
+                    AnsiConsole.MarkupLine($"[red]Error reading JSON:[/] {ex.Message}");
+                    items = new List<T>(); // Returnera tom lista
+                }
+            });
+
+            // Bekräfta antal laddade objekt efter spinnern
+            AnsiConsole.MarkupLine($"[green]Loaded {items.Count} items from:[/] {displayPath}");
+            return items;
 
         }
 
+
+        // Statisk metod för att spara lista till JSON-fil
         public static void SaveToJsonFile<T>(List<T> items, string filePath)
         {
             var displayPath = PathService.GetRelativePath(filePath);
 
-            // behövs för UserType printa ut sträng
-            var options = new JsonSerializerOptions
+            // Visar spinner medan data sparas
+            LoadingUI.RunWithSpinner($"Sparar data till: {displayPath}", () =>
             {
-                Converters = { new JsonStringEnumConverter() },
-                WriteIndented = true 
-            };
+                try
+                {
+                    // Behövs för att skriva ut enum-värden som strängar
+                    var options = new JsonSerializerOptions
+                    {
+                        Converters = { new JsonStringEnumConverter() },
+                        WriteIndented = true
+                    };
 
-            // serialisera listan av objekt till JSON-format
-            var json = JsonSerializer.Serialize(items, options);
+                    // Serialisera listan till JSON-format
+                    var json = JsonSerializer.Serialize(items, options);
 
-            // skriv JSON-innehållet till filen
-            File.WriteAllText(filePath, json); //skriver över filen (fast det gammla ta inte bort!)
+                    // Skriv JSON till fil (skriver över, men tar inte bort gammal fil)
+                    File.WriteAllText(filePath, json);
 
-            // visar feedback 
-            AnsiConsole.MarkupLine($"[green]Data saved in file:[/] {displayPath}");
-
-
-            // fixar till try catch senare med feedback till användaren
+                    // Bekräfta att data sparats
+                    AnsiConsole.MarkupLine($"[green]Data saved to file:[/] {displayPath}");
+                }
+                catch (Exception ex)
+                {
+                    // Fel vid sparning
+                    AnsiConsole.MarkupLine($"[red]Error saving to file:[/] {ex.Message}");
+                }
+            });
         }
 
-    } // end of class
 
 
+
+    }
 }
