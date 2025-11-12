@@ -16,7 +16,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
     public class BusinessMenu
     {
-        public void DisplayBusinessMenu(Business businessUser)
+        public void DisplayBusinessMenu(User user)
         {
             bool runningbusiness = true;
             while (runningbusiness)

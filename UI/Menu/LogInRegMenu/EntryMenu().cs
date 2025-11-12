@@ -12,7 +12,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         private readonly UserAccountManager _accountManager;
 
-        
+
         public EntryMenu(UserAccountManager accountManager)
         {
             _accountManager = accountManager;
@@ -45,15 +45,20 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
                         if (user != null)
                         {
-                            if (user is Business businessUser)
+                            //Kolla användartyp och visa rätt meny
+                            if (user.Type == UserType.Business)
                             {
                                 var businessMenu = new BusinessMenu();
-                                businessMenu.DisplayBusinessMenu(businessUser);
+                                businessMenu.DisplayBusinessMenu(user); // ✅ works fine
                             }
-                             else if (user is not Business)
+                            else if (user.Type == UserType.Private)
                             {
                                 var privateMenu = new PrivateMenu();
                                 privateMenu.ShowPriv(user);
+                            }
+                            else
+                            {
+                                AnsiConsole.MarkupLine("[red]Unknown user type![/]");
                             }
                         }
                         break;
