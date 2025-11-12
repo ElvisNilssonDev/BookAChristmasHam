@@ -13,6 +13,9 @@ namespace BookAChristmasHam.Models
 
         [JsonConverter(typeof(JsonStringEnumConverter))] // printar ut sträng i json, istället för 0/1 för type.
         public UserType Type { get; set; }
+        public string? CompanyName { get; set; }
+
+
     }
 
     // Två typer of users 

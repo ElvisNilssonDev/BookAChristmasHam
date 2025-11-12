@@ -46,7 +46,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                             if (user.Type == UserType.Business)
                             {
                                 var businessMenu = new BusinessMenu();
-                                businessMenu.DisplayBusinessMenu(user); // ✅ works fine
+                                businessMenu.DisplayBusinessMenu(user);
                             }
                             else if (user.Type == UserType.Private)
                             {
