@@ -21,12 +21,18 @@ namespace BookAChristmasHam.Service
         public StorageService()
         {
             // skapa user store
+            // skapa user store
             UserStore = CreateStore<User>("users.json");
             UserStore.LoadFromJson(); // laddar users direkt
 
             // Skapa övriga stores, men vänta med att ladda data
-            HamStore = CreateStore<ChristmasHam>("hams.json");      // Vänta med att ladda
+            UserStore.LoadFromJson(); // laddar users direkt
+
+            // Skapa övriga stores, men vänta med att ladda data
+            HamStore = CreateStore<ChristmasHam>("hams.json");      // Vänta med att ladda      // Vänta med att ladda
             BookingStore = CreateStore<Booking>("bookings.json");   // Vänta med att ladda
+
+   // Vänta med att ladda
 
 
         }
