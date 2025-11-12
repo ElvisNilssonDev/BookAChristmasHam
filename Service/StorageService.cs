@@ -3,7 +3,6 @@
 namespace BookAChristmasHam.Service
 {// Använder StorageService för att undvika duplicerad lagring och hålla data synkroniserad
 
-
     // Centraliserar all lagring i applikationen
     public class StorageService
     {

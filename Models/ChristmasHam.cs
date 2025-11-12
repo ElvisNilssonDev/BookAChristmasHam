@@ -17,7 +17,5 @@ namespace BookAChristmasHam.Models
             BusinessId = businessId;
             Data = data;
         }
-
-
     }
 }
