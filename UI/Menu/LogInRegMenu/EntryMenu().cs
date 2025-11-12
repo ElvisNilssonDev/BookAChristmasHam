@@ -1,6 +1,7 @@
 ﻿using BookAChristmasHam.Managers;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Service;
+using BookAChristmasHam.UI.Helper;
 using BookAChristmasHam.UI.Menu.LoggedInMenu;
 using Spectre.Console;
 
@@ -11,10 +12,12 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
     { // Visa meny för inloggning/registrering
 
         private readonly UserAccountManager _accountManager;
+        private readonly StorageService _storageService;
 
-        public EntryMenu(UserAccountManager accountManager)
+        public EntryMenu(StorageService storage, UserAccountManager accountManager)
         {
             _accountManager = accountManager;
+            _storageService = storage;
         }
 
         private readonly PrivateMenu privateMenu = new PrivateMenu();
@@ -44,6 +47,12 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
                         if (user != null)
                         {
+                            // visa vilken user-type som loggade in
+                            LoadingUI.ShowLoginStatus(user);
+
+                            // ladda in users.jon efter att loggat in
+                            _storageService.LoadUserData(user);
+
                             //Kolla användartyp och visa rätt meny
                             if (user.Type == UserType.Business)
                             {

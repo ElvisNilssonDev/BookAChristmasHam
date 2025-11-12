@@ -14,7 +14,7 @@ class Program
 
         var storage = new StorageService(); // Initierar lagringstjänst
         var accountManager = new UserAccountManager(storage); // Hanterar användarlogik
-        var entryMenu = new EntryMenu(accountManager); // Startmeny för inloggning/registrering
+        var entryMenu = new EntryMenu(storage, accountManager); // Startmeny för inloggning/registrering
 
         //var userManager = new UserManager(storage); 
 
