@@ -12,7 +12,6 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         private readonly UserAccountManager _accountManager;
 
-
         public EntryMenu(UserAccountManager accountManager)
         {
             _accountManager = accountManager;
@@ -20,8 +19,6 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         private readonly PrivateMenu privateMenu = new PrivateMenu();
         private readonly BusinessMenu businessMenu = new BusinessMenu();
-
-
 
         public User? Show()
         {

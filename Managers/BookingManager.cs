@@ -38,7 +38,7 @@ namespace BookAChristmasHam.Managers
 
 
         // Uppdatera bokning
-        public bool UpdateBooing(Booking updatedBooking)
+        public bool UpdateBooking(Booking updatedBooking)
         {
             var result = _bookingStore.Update(updatedBooking);
             if (result)

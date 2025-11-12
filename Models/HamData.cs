@@ -10,8 +10,6 @@ namespace BookAChristmasHam.Models
         public bool IsCooked { get; set; }    // Kokt eller rå
         public int Week { get; set; }         // Leveransvecka
 
-
-
         public HamData(int weight, bool brined, bool hasBones, bool isCooked, int week)
         {
             Weight = weight;
@@ -21,7 +19,5 @@ namespace BookAChristmasHam.Models
             Week = week;
 
         }
-
-
     }
 }
