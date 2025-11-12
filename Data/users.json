@@ -5,7 +5,8 @@
     "Email": "a",
     "Password": "a",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 2,
@@ -13,7 +14,8 @@
     "Email": "b",
     "Password": "b",
     "Username": null,
-    "Type": "Private"
+    "Type": "Private",
+    "CompanyName": null
   },
   {
     "Id": 3,
@@ -21,7 +23,8 @@
     "Email": "@Elvis",
     "Password": "1234",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 4,
@@ -29,7 +32,8 @@
     "Email": "c",
     "Password": "c",
     "Username": null,
-    "Type": "Private"
+    "Type": "Private",
+    "CompanyName": null
   },
   {
     "Id": 5,
@@ -37,7 +41,8 @@
     "Email": "a@a.com",
     "Password": "1234",
     "Username": null,
-    "Type": "Private"
+    "Type": "Private",
+    "CompanyName": null
   },
   {
     "Id": 6,
@@ -45,7 +50,8 @@
     "Email": "123@123.com",
     "Password": "123",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 7,
@@ -53,7 +59,8 @@
     "Email": "Nilssonelvis@gmail.com",
     "Password": "Minion89",
     "Username": null,
-    "Type": "Private"
+    "Type": "Private",
+    "CompanyName": null
   },
   {
     "Id": 8,
@@ -61,7 +68,8 @@
     "Email": "nevaljao994@gmail.com",
     "Password": "NemoProblemo",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 9,
@@ -69,7 +77,8 @@
     "Email": "122@gmail.com",
     "Password": "122",
     "Username": null,
-    "Type": "Private"
+    "Type": "Private",
+    "CompanyName": null
   },
   {
     "Id": 10,
@@ -77,7 +86,8 @@
     "Email": "132@gmail.com",
     "Password": "132",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 11,
@@ -85,7 +95,8 @@
     "Email": "321@gmail.com",
     "Password": "mi",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 12,
@@ -93,7 +104,8 @@
     "Email": "a.a@gmail.com",
     "Password": "a",
     "Username": null,
-    "Type": "Private"
+    "Type": "Private",
+    "CompanyName": null
   },
   {
     "Id": 13,
@@ -101,7 +113,8 @@
     "Email": "dadirhashi@gmai.com",
     "Password": "Daadir123",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 14,
@@ -109,7 +122,8 @@
     "Email": "121@gmail.com",
     "Password": "121",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 15,
@@ -117,7 +131,8 @@
     "Email": "1112@gmail.com",
     "Password": "1112",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 16,
@@ -125,7 +140,8 @@
     "Email": "qwe@gmail.com",
     "Password": "qwe",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 17,
@@ -133,7 +149,8 @@
     "Email": "x",
     "Password": "x",
     "Username": null,
-    "Type": "Business"
+    "Type": "Business",
+    "CompanyName": null
   },
   {
     "Id": 18,
@@ -141,6 +158,25 @@
     "Email": "v",
     "Password": "v",
     "Username": null,
-    "Type": "Private"
+    "Type": "Private",
+    "CompanyName": null
+  },
+  {
+    "Id": 19,
+    "Name": "cc",
+    "Email": "cc",
+    "Password": "cc",
+    "Username": null,
+    "Type": "Business",
+    "CompanyName": null
+  },
+  {
+    "Id": 20,
+    "Name": "mc",
+    "Email": "mc",
+    "Password": "mc",
+    "Username": null,
+    "Type": "Business",
+    "CompanyName": "mcdonalds"
   }
 ]
