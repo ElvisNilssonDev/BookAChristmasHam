@@ -168,7 +168,7 @@
     "Password": "cc",
     "Username": null,
     "Type": "Business",
-    "CompanyName": "CC Foods"
+    "CompanyName": "coca cola"
   },
   {
     "Id": 20,
@@ -181,21 +181,11 @@
   },
   {
     "Id": 21,
-    "Name": "y",
-    "Email": "yy",
-    "Password": "y",
+    "Name": "s",
+    "Email": "s",
+    "Password": "s",
     "Username": null,
     "Type": "Business",
-    "CompanyName": "Y Mat AB"
-  },
-  {
-    "Id": 22,
-    "Name": "bk",
-    "Email": "@bk",
-    "Password": "1234",
-    "Username": null,
-    "Type": "Business",
-    "CompanyName": "burgerking"
+    "CompanyName": "Potatis Gris"
   }
- 
 ]
