@@ -11,7 +11,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
     public class EntryMenu
     { // Visa meny för inloggning/registrering
 
-   
+
 
         private readonly UserAccountManager _accountManager;
         private readonly StorageService _storageService;
@@ -31,8 +31,11 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         public User? Show()
         {
+            Thread.Sleep(2000);
+
             while (true)
             {
+
                 AnsiConsole.Clear();
                 AnsiConsole.Write(
                 new FigletText("Book A Christmas Ham!")

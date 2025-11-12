@@ -19,8 +19,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
         public void DisplayBusinessMenu(User user)
         {
             bool runningbusiness = true;
+
+            Thread.Sleep(2000);
+
             while (runningbusiness)
             {
+               
+
                 Console.Clear();
                 // Visar meny för företagsanvändare
                 AnsiConsole.Write(
@@ -31,6 +36,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 new FigletText("Business")
                 .Centered()
                 .Color(Color.Green));
+
                 var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("[green]Select an option:[/]")

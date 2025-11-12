@@ -14,13 +14,17 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
         {
             bool runningpriv = true;
 
+            Thread.Sleep(2000);
+
             while (runningpriv)
             {
+
                 AnsiConsole.Clear();
                 AnsiConsole.Write(
                 new FigletText("ChristmasHam!")
                 .Centered()
                 .Color(Color.Red));
+
                 var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("[green]Select an option:[/]")
