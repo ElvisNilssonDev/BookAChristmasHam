@@ -168,7 +168,7 @@
     "Password": "cc",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "coca cola"
   },
   {
     "Id": 20,
@@ -178,5 +178,14 @@
     "Username": null,
     "Type": "Business",
     "CompanyName": "mcdonalds"
+  },
+  {
+    "Id": 21,
+    "Name": "s",
+    "Email": "s",
+    "Password": "s",
+    "Username": null,
+    "Type": "Business",
+    "CompanyName": "Potatis Gris"
   }
 ]

@@ -28,7 +28,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 .Centered()
                 .Color(Color.Red));
                 AnsiConsole.Write(
-                new FigletText(user.Name)
+                new FigletText(user.CompanyName)
                 .Centered()
                 .Color(Color.Green));
                 var choice = AnsiConsole.Prompt(
