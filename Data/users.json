@@ -6,7 +6,11 @@
     "Password": "a",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "Skinka \u0026 Co"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 2,
@@ -24,7 +28,11 @@
     "Password": "1234",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "Elvis Foods"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 4,
@@ -51,7 +59,11 @@
     "Password": "123",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "123 Delikatesser"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 7,
@@ -69,7 +81,11 @@
     "Password": "NemoProblemo",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "Nev Foods"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 9,
@@ -87,7 +103,11 @@
     "Password": "132",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "132 Gourmet"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 11,
@@ -96,7 +116,11 @@
     "Password": "mi",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "321 Mat AB"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 12,
@@ -114,7 +138,11 @@
     "Password": "Daadir123",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "Dadir Livs"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 14,
@@ -123,7 +151,11 @@
     "Password": "121",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "121 Skinkor"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 15,
@@ -132,7 +164,11 @@
     "Password": "1112",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "1112 Foods"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 16,
@@ -141,7 +177,11 @@
     "Password": "qwe",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "Qwe Delikatess"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 17,
@@ -150,7 +190,11 @@
     "Password": "x",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "Xtra Mat"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 18,
@@ -168,7 +212,11 @@
     "Password": "cc",
     "Username": null,
     "Type": "Business",
+<<<<<<< HEAD
     "CompanyName": "coca cola"
+=======
+    "CompanyName": null
+>>>>>>> 29d1dc9 (add spinner)
   },
   {
     "Id": 20,
