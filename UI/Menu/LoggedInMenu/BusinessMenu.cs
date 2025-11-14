@@ -28,7 +28,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 .Centered()
                 .Color(Color.Red));
                 AnsiConsole.Write(
-                new FigletText(user.CompanyName)
+                new FigletText(user.CompanyName ?? "Business User")
                 .Centered()
                 .Color(Color.Green));
                 var choice = AnsiConsole.Prompt(
@@ -47,11 +47,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 switch (choice)
                 {
                     case "Show all orders":
+                    //Visa alla ordrar som är kopplade till företagets CompanyName
                         AnsiConsole.MarkupLine("[blue]ShowAllHam()...[/]");
                         AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
                     case "Delete an order":
+                    //Radera en order via dess bookingId
                         AnsiConsole.MarkupLine("[blue]DeleteOrder()...[/]");
                         AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
