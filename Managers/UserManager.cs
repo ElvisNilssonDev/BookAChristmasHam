@@ -23,7 +23,7 @@ namespace BookAChristmasHam.Managers
             _bookingManager = new BookingManager(storage);
         }
 
-        // VISAR ALLA HAMS TILL USER-PRIVATE (P)
+        // HÄMTAR ALLA HAMS TILL USER-PRIVATE (P)
         public IEnumerable<ChristmasHam> GetAvailableHams()
         {
             return _hamStore.GetAll();
