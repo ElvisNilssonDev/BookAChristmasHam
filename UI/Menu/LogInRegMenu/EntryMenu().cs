@@ -50,8 +50,8 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                             // visa vilken user-type som loggade in
                             LoadingUI.ShowLoginStatus(user);
 
-                            // ladda in users.jon efter att loggat in
-                            _storageService.LoadUserData(user);
+                            // ladda in 
+                            _storageService.LoadHamAndBooking();
 
                             //Kolla användartyp och visa rätt meny
                             if (user.Type == UserType.Business)
