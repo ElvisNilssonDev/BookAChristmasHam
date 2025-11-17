@@ -13,11 +13,14 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
         private readonly UserAccountManager _accountManager;
         private readonly StorageService _storageService;
+        private readonly PrivateMenu _privateMenu;
 
         public EntryMenu(StorageService storage, UserAccountManager accountManager)
         {
             _accountManager = accountManager;
             _storageService = storage;
+
+            _privateMenu = new PrivateMenu(storage);
         }
 
         private readonly PrivateMenu privateMenu = new PrivateMenu();
@@ -51,6 +54,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
                             // ladda in 
                             _storageService.LoadHamAndBooking();
+                            Thread.Sleep(1000); // ge användaren tid att läsa
 
                             //Kolla användartyp och visa rätt meny
                             if (user.Type == UserType.Business)
@@ -61,8 +65,10 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                             }
                             else if (user.Type == UserType.Private)
                             {
-                                var privateMenu = new PrivateMenu();
-                                privateMenu.ShowPriv(user);
+                                
+                                //var privateMenu = new PrivateMenu();
+                                //privateMenu.ShowPriv(user);
+                                _privateMenu.ShowPriv(user);
                             }
                             else
                             {

@@ -1,12 +1,12 @@
 [
   {
-    "Id": 1,
+    "Id": 160,
     "Name": "a",
     "Email": "a",
     "Password": "a",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Skinka \u0026 Co"
   },
   {
     "Id": 2,
@@ -24,7 +24,7 @@
     "Password": "1234",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Elvis Foods"
   },
   {
     "Id": 4,
@@ -51,7 +51,7 @@
     "Password": "123",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "123 Delikatesser"
   },
   {
     "Id": 7,
@@ -69,7 +69,7 @@
     "Password": "NemoProblemo",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Nev Foods"
   },
   {
     "Id": 9,
@@ -87,7 +87,7 @@
     "Password": "132",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "132 Gourmet"
   },
   {
     "Id": 11,
@@ -96,7 +96,7 @@
     "Password": "mi",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "321 Mat AB"
   },
   {
     "Id": 12,
@@ -114,7 +114,7 @@
     "Password": "Daadir123",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Dadir Livs"
   },
   {
     "Id": 14,
@@ -123,7 +123,7 @@
     "Password": "121",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "121 Skinkor"
   },
   {
     "Id": 15,
@@ -132,7 +132,7 @@
     "Password": "1112",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "1112 Foods"
   },
   {
     "Id": 16,
@@ -141,7 +141,7 @@
     "Password": "qwe",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Qwe Delikatess"
   },
   {
     "Id": 17,
@@ -150,7 +150,7 @@
     "Password": "x",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Xtra Mat"
   },
   {
     "Id": 18,
@@ -168,7 +168,7 @@
     "Password": "cc",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "CC Foods"
   },
   {
     "Id": 20,
@@ -186,6 +186,16 @@
     "Password": "y",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Y Mat AB"
+  },
+  {
+    "Id": 22,
+    "Name": "bk",
+    "Email": "@bk",
+    "Password": "1234",
+    "Username": null,
+    "Type": "Business",
+    "CompanyName": "burgerking"
   }
+ 
 ]

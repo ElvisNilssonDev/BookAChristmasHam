@@ -1,6 +1,7 @@
 ﻿using Spectre.Console;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Managers;
+using BookAChristmasHam.Service;
 
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu;
 
@@ -53,6 +54,8 @@ public class RegisterMenu
 
             newUser = new Business
             {
+                //Id = _accountManager.GetNextUserId(),
+
                 Name = name,
                 Email = email,
                 Password = password,
@@ -63,13 +66,14 @@ public class RegisterMenu
         {
             newUser = new User
             {
+                //Id = _accountManager.GetNextUserId(),
+
                 Name = name,
                 Email = email,
                 Password = password,
                 Type = UserType.Private
             };
         }
-
         _accountManager.Register(newUser);
         _accountManager.Save(); 
         AnsiConsole.MarkupLine("[green]Registration successful![/]");

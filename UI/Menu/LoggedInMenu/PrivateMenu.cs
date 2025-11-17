@@ -1,18 +1,30 @@
-﻿using BookAChristmasHam.Managers;
-using BookAChristmasHam.Models;
-using BookAChristmasHam.Service;
-using Spectre.Console;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using BookAChristmasHam.Managers;
+using BookAChristmasHam.Models;
+using BookAChristmasHam.Service;
+using Spectre.Console;
 
 namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
     public class PrivateMenu
     {
+
+        private readonly UserManager _userManager;
+
+        public PrivateMenu() { }
+
+        public PrivateMenu(StorageService storage)
+        {
+            _userManager = new UserManager(storage);
+        }
+
+
         public void ShowPriv(User user)
         {
             bool runningpriv = true;
@@ -38,20 +50,19 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 AnsiConsole.MarkupLine($"You selected: [yellow]{choice}[/]");
                 switch (choice)
                 {
-                    case "Order ChristmasHam":
-                        // Visa mina bokningar
-                        //AnsiConsole.MarkupLine("[blue]Visa mina bokningar - Funktionalitet kommer snart![/]"); 
 
+                    case "Order ChristmasHam":
                         var hamData = AskForHamPreferences();
-                        //_userManager.BookHam(user, hamId);
-                        AnsiConsole.MarkupLine("Tryck på valfri tangent för att fortsätta...");
+                        _userManager.PlaceOrder(user, hamData);
+
+                        AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
 
                     case "See Your Order":
-                        // Ta bort en bokning
-                        AnsiConsole.MarkupLine("[blue]Ta bort en bokning - Funktionalitet kommer snart![/]");
-                        AnsiConsole.MarkupLine("Tryck på valfri tangent för att fortsätta...");
+                        _userManager.SeeMyOrders(user);
+
+                        AnsiConsole.MarkupLine("Press any key to continue...");
                         Console.ReadKey();
                         break;
 
@@ -130,6 +141,8 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 
             return hamData;
         }
+
+
 
 
 
