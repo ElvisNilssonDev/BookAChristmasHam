@@ -234,6 +234,16 @@
     "Password": "y",
     "Username": null,
     "Type": "Business",
-    "CompanyName": null
+    "CompanyName": "Y Mat AB"
+  },
+  {
+    "Id": 22,
+    "Name": "bk",
+    "Email": "@bk",
+    "Password": "1234",
+    "Username": null,
+    "Type": "Business",
+    "CompanyName": "burgerking"
   }
+ 
 ]
