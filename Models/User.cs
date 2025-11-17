@@ -15,6 +15,10 @@ namespace BookAChristmasHam.Models
         public UserType Type { get; set; }
         public string? CompanyName { get; set; }
 
+        public override string ToString()
+        {
+            return $"Name: {Name}, Email: {Email}, Type: {Type}";
+        }
 
     }
 

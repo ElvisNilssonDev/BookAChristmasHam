@@ -20,8 +20,8 @@ namespace BookAChristmasHam.Managers
         // lägg/skapa en bokning (Create)
         public void AddBooking(Booking booking)
         {
-            _bookingStore.Add(booking);            // NATALIE FIXA EN Add() metod i DATASTORE
-            _bookingStore.SaveToJson();            //JHON FIXAR EN SaveToJson() METOD I DATASTORE
+            _bookingStore.Add(booking);            
+            _bookingStore.SaveToJson();          
         }
 
 

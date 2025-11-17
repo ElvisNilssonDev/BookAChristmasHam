@@ -13,11 +13,27 @@ namespace BookAChristmasHam.Models
         public int UserId { get; set; }           // Vem har bokat
         public int ChristmasHamId { get; set; }   // Vilken skinka
         public int BusinessId { get; set; }      // vilket företaget som äger skinkan
+
+        public Booking(int userid, int christmashamid, int businessid)
+        {
+            //Id = id;
+            UserId = userid;
+            ChristmasHamId = christmashamid;
+            BusinessId = businessid;
+
+        }
+
+
+
     }
 
-    // om vi vill lägga till fler properties i framtiden
-    //public DateTime BookingDate { get; set; }
-    //public int Quantity { get; set; }   = 0;
+
+  
 
 
-}
+        // om vi vill lägga till fler properties i framtiden
+        //public DateTime BookingDate { get; set; }
+        //public int Quantity { get; set; }   = 0;
+
+
+    }
