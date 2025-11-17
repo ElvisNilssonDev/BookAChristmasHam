@@ -1,56 +1,158 @@
 ﻿
+using System.Linq.Expressions;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Service;
 using Spectre.Console;
 
 namespace BookAChristmasHam.Managers
 {
-    // HÄR ÄR DET TÄNKT ATT USER-PRIVATE SER ALLA HAMS OCH LÄGGER EN ORDER (skapar bokningar)
+    // Hanterar bokningar för användare 
     public class UserManager
     {
-        // HÄMTAR LAGRING FÖR HAM SOM EXISTERAR i _hamStore+CRUD-FUNKTIONER
-        private readonly DataStore<ChristmasHam> _hamStore;
+        private readonly StorageService _storageService;
+        private readonly UserAccountManager _userAccountManager;
 
-        // HÄMTAR BOKNINGAR SOM HANTERAS AV BookingManager MEN FINNS I _bookingManager
-       // private readonly DataStore<Booking> _bookingstore;
-
-        private readonly BookingManager _bookingManager;
-
-        // KONSTROKTUR
         public UserManager(StorageService storage)
         {
-            _hamStore = storage.HamStore;
-            _bookingManager = new BookingManager(storage);
+            _storageService = storage;
+            _userAccountManager = new UserAccountManager(storage);
         }
 
-        // HÄMTAR ALLA HAMS TILL USER-PRIVATE (P)
-        public IEnumerable<ChristmasHam> GetAvailableHams()
+        public void PlaceOrder(User user, HamData hamData)
         {
-            return _hamStore.GetAll();
-        }
 
-        // USER-PRIVATE LÄGGER EN ORDER
-        public void BookHam(User user, int hamId)
-        {
-            if (user.Type == UserType.Business)
+            // hämta företagare
+            var businessUsers = _userAccountManager.GetBusinesses().ToList();
+
+            //  finns företagaren ?
+            if (!businessUsers.Any())
             {
-                AnsiConsole.MarkupLine("[red]Companies cannot book hams.[/]");
+                AnsiConsole.MarkupLine("[red]No businesses available to deliver hams.[/]");
                 return;
             }
 
-            var ham = _hamStore.Get(hamId); // HÄMTER EN HAM MED VISS ID
-            if (ham == null) return; 
+            // slump generator.
+            var random = new Random();
 
-            var booking = new Booking // EN NY BOOKING SKAPAS
-            {
-                UserId = user.Id, // vem som bokar, user-Private ska boka
-                ChristmasHamId = ham.Id, 
-                BusinessId = ham.BusinessId // varje ham ägs av ett unik företag
-            };
+            // slump index
+            var RandomBusinessUser = random.Next(businessUsers.Count);
 
-            _bookingManager.AddBooking(booking); // ORDER LÄGGS FÖR user-P
-            AnsiConsole.MarkupLine("[green]The booking is complete![/]");
+            // Företag som ska leverera skinkan. Låt programmet välja vilket företag
+            var selectedBusiness = businessUsers[RandomBusinessUser];
+
+            // skapa skinkan
+            var ham = new ChristmasHam(selectedBusiness.Id, hamData);
+
+            // lägg till och spara, nextid ges via add
+            _storageService.HamStore.Add(ham);
+            _storageService.HamStore.SaveToJson();
+
+            // skapa bokning
+            var NewBooking = new Booking(user.Id, ham.Id, selectedBusiness.Id);
+
+            // lägg till och spara, nextid ges via add
+            _storageService.BookingStore.Add(NewBooking);
+            _storageService.BookingStore.SaveToJson();
+
+            // Bekräftelse
+            AnsiConsole.MarkupLine($"\n[green]Booking created![/]");
+            AnsiConsole.MarkupLine($"[blue]Ham:[/] {ham.Data}");
+            AnsiConsole.MarkupLine($"[blue]Delivered by:[/] {selectedBusiness.CompanyName}");
+
+
         }
+
+        public void SeeMyOrders(User user)
+        {
+
+            // hämta bokningar från användaren
+            var myBookings = _storageService.BookingStore.GetAll()
+                .Where(b => b.UserId == user.Id);
+
+            // finns bokningar från användaren?
+            if (!myBookings.Any())
+            {
+                AnsiConsole.MarkupLine("[red]You have no bookings yet.[/]");
+                return;
+            }
+
+            // hämta företagare
+            var businessUsers = _userAccountManager.GetBusinesses().ToList();
+
+            AnsiConsole.MarkupLine($"[blue]User info:[/] {user}");
+
+            // loopa över listan myBookings
+            foreach (var booking in myBookings)
+            {
+                // varje bokning innehåller en ChristmasHamId
+                var hamdId = booking.ChristmasHamId;
+
+                // hämta ham 
+                var myHam = _storageService.HamStore.Get(hamdId);
+
+                if (myHam == null)
+                {
+                    AnsiConsole.MarkupLine($"[red]Ham with ID {hamdId} not found.[/]");
+                    continue;
+                }
+
+                // hämta företaget
+                var businessId = booking.BusinessId;
+
+                // Hämta företaget som matchar bokningens BusinessId
+                var business = businessUsers.FirstOrDefault(b => b.Id == businessId);
+
+
+                if (business == null)
+                {
+                    AnsiConsole.MarkupLine($"[red]Business with ID {businessId} not found.[/]");
+                    continue;
+                }
+
+                AnsiConsole.MarkupLine($"\n[green]Booking ID:[/] {booking.Id}");
+                AnsiConsole.MarkupLine($"[blue]Ham:[/] {myHam.Data}");
+                AnsiConsole.MarkupLine($"[blue]Delivered by:[/] {business.CompanyName}");
+            }
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+        //// USER-PRIVATE LÄGGER EN ORDER
+        //public void BookHam(User user, int hamId)
+        //{
+        //    if (user.Type == UserType.Business)
+        //    {
+        //        AnsiConsole.MarkupLine("[red]Companies cannot book hams.[/]");
+        //        return;
+        //    }
+
+        //    var ham = _hamStore.Get(hamId); // HÄMTER EN HAM MED VISS ID
+        //    if (ham == null) return; 
+
+        //    //var boo
+
+        //    //var booking = new Booking // EN NY BOOKING SKAPAS
+        //    //{
+        //    //    UserId = user.Id, // vem som bokar, user-Private ska boka
+        //    //    ChristmasHamId = ham.Id, 
+        //    //    BusinessId = ham.BusinessId // varje ham ägs av ett unik företag
+        //    //};
+
+        //    //_bookingManager.AddBooking(booking); // ORDER LÄGGS FÖR user-P
+        //    //AnsiConsole.MarkupLine("[green]The booking is complete![/]");
+        //}
 
     }
 

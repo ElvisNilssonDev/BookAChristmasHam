@@ -11,14 +11,9 @@ namespace BookAChristmasHam.Managers
         //Konstruktor: tar emot StorageService för att hämta UserStore (användardata)
         public UserAccountManager(StorageService storage)
         {
-            _userStore = storage.UserStore; // json-laddas in vid instans av UserAccountManager
+            _userStore = storage.UserStore;
         }
-        ////Konstruktor
-        //public UserAccountManager(DataStore<User> userStore)
-        //{
-        //    _userStore = userStore;
-        //    _userStore.LoadFromJson(); // hämta users från mappen Data/users.json
-        //}
+     
         // checka user-info
         public User? Authenticate(string email, string password)
         {
@@ -39,6 +34,29 @@ namespace BookAChristmasHam.Managers
         {
             return _userStore.GetAll().Any(u => u.Email == email);
         }
-        // kan man lägga in fler fkner, ex mer CRUD om vi vill
+        
+        // alla users
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _userStore.GetAll();
+        }
+
+        // allmän filter
+        public IEnumerable<User> Filter(Func<User, bool> predicate)
+        {
+            return GetAllUsers().Where(predicate);
+        }
+
+        // filtrera ut företagare
+        public IEnumerable<User> GetBusinesses()
+        {
+            return Filter(u => u.Type == UserType.Business);
+        }
+        //public int GetNextUserId()
+        //{
+        //    return _userStore.GetNextId();
+        //}
+
+
     }
 }

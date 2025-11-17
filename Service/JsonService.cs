@@ -13,13 +13,15 @@ namespace BookAChristmasHam.Service
         // Statisk generisk metod för att läsa JSON-data från fil
         public static List<T> ReadFromJsonFile<T>(string filePath)
         {
+            Thread.Sleep(1000);
+
             // Relativ sökväg för bättre läsbarhet, kan ändras senare
             var displayPath = PathService.GetRelativePath(filePath);
 
             List<T> items = new(); // Förbered lista att fylla med data
 
             // Visar spinner medan data laddas
-            LoadingUI.RunWithSpinner($"Laddar data från: {displayPath}", () =>
+            LoadingUI.RunWithSpinner($"Loading [green]{typeof(T).Name}[/] data... {displayPath}", () =>
             {
                 // Kontrollera om filen finns, om inte skapa tom JSON-array
                 if (!File.Exists(filePath))
@@ -55,17 +57,21 @@ namespace BookAChristmasHam.Service
                     }
 
                     items = deserialized; // Sätt laddade objekt
+
                 }
                 catch (Exception ex)
                 {
                     // Fel vid läsning av JSON
-                    AnsiConsole.MarkupLine($"[red]Error reading JSON:[/] {ex.Message}");
+                    var typeName = typeof(T).Name;
+                    AnsiConsole.MarkupLine($"[red]Error loading {typeName} data from file:[/] {ex.Message}");
                     items = new List<T>(); // Returnera tom lista
                 }
             });
 
             // Bekräfta antal laddade objekt efter spinnern
             AnsiConsole.MarkupLine($"[green]Loaded {items.Count} items from:[/] {displayPath}");
+            AnsiConsole.MarkupLine("[grey]Done loading![/]");
+
             return items;
 
         }
@@ -77,8 +83,10 @@ namespace BookAChristmasHam.Service
             var displayPath = PathService.GetRelativePath(filePath);
 
             // Visar spinner medan data sparas
-            LoadingUI.RunWithSpinner($"Sparar data till: {displayPath}", () =>
+            LoadingUI.RunWithSpinner($"Saving {typeof(T).Name} data... {displayPath}", () =>
             {
+                Thread.Sleep(1000);
+
                 try
                 {
                     // Behövs för att skriva ut enum-värden som strängar
@@ -96,12 +104,17 @@ namespace BookAChristmasHam.Service
 
                     // Bekräfta att data sparats
                     AnsiConsole.MarkupLine($"[green]Data saved to file:[/] {displayPath}");
+                    AnsiConsole.MarkupLine("[grey]Done saving![/]");
                 }
                 catch (Exception ex)
                 {
                     // Fel vid sparning
-                    AnsiConsole.MarkupLine($"[red]Error saving to file:[/] {ex.Message}");
+                    var typeName = typeof(T).Name;
+                    AnsiConsole.MarkupLine($"[red]Error saving {typeName} data to file:[/] {ex.Message}");
                 }
+
+
+
             });
         }
 

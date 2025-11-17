@@ -11,9 +11,9 @@ namespace BookAChristmasHam.Models
 
         // Konstruktor som används för att skapa ett ChrismasHam objekt
         // Här skickar man in alla värden när man skapar skinkan
-        public ChristmasHam(int id, int businessId, HamData data)
+        public ChristmasHam(int businessId, HamData data)
         {
-            Id = id;
+            //Id = id;
             BusinessId = businessId;
             Data = data;
         }
