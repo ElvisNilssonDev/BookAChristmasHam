@@ -94,6 +94,47 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
         }
 
         //Visa alla ordrar kopplade till företaget
+        // private void ShowMyOrders(User user)
+        // {
+        //     Console.Clear();
+        //     AnsiConsole.Write(
+        //         new FigletText("Your Orders")
+        //         .Centered()
+        //         .Color(Color.Red));
+
+        //     var orders = _businessManager.GetMyOrders(user.Id).ToList();
+
+        //     if (!orders.Any())
+        //     {
+        //         AnsiConsole.MarkupLine("[yellow]No orders found for your business.[/]");
+        //         AnsiConsole.MarkupLine("Press any key to continue...");
+        //         Console.ReadKey();
+        //         return;
+        //     }
+
+        //     //Skapar en tabell för att visa bokningar
+        //     var table = new Table();
+        //     table.AddColumn("[bold]Booking ID[/]");
+        //     table.AddColumn("[bold]User ID[/]");
+        //     table.AddColumn("[bold]Christmas Ham ID[/]");
+        //     table.AddColumn("[bold]Company Name[/]");
+
+        //     foreach (var order in orders)
+        //     {
+        //         var companyName = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
+        //         table.AddRow(
+        //             order.Id.ToString(),
+        //             order.UserId.ToString(),
+        //             order.ChristmasHamId.ToString(),
+        //             companyName
+        //         );
+        //     }
+
+        //     AnsiConsole.Write(table);
+        //     AnsiConsole.MarkupLine($"\n[green]Total orders: {orders.Count}[/]");
+        //     AnsiConsole.MarkupLine("Press any key to continue...");
+        //     Console.ReadKey();
+        // }
         private void ShowMyOrders(User user)
         {
             Console.Clear();
@@ -112,7 +153,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 return;
             }
 
-            //Skapar en tabell för att visa bokningar
+            //Tabell för att visa ordrar
             var table = new Table();
             table.AddColumn("[bold]Booking ID[/]");
             table.AddColumn("[bold]User ID[/]");
@@ -130,11 +171,38 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 );
             }
 
+            //Visar tabellen
             AnsiConsole.Write(table);
-            AnsiConsole.MarkupLine($"\n[green]Total orders: {orders.Count}[/]");
-            AnsiConsole.MarkupLine("Press any key to continue...");
+
+            //Välj en order för mer detaljer
+            var selectedOrder = AnsiConsole.Prompt(
+                new SelectionPrompt<Booking>()
+                    .Title("\n[green]Select an order:[/]")
+                    .UseConverter(order =>
+                    {
+                        var company = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
+                        return $"{order.Id} | User {order.UserId} | Ham {order.ChristmasHamId} | {company}";
+                    })
+                    .AddChoices(orders)
+            );
+
+            //Visa vilken som valdes
+            AnsiConsole.MarkupLine($"\n[bold green]You selected order ID: {selectedOrder.Id}[/]");
+            var ham = _businessManager.GetHamById(selectedOrder.ChristmasHamId);
+            if (ham != null)
+            {
+                var hamDetails = ham.Data?.ToString() ?? "No details available.";
+                AnsiConsole.MarkupLine($"\n[green]Ham ID:[/] {ham.Id}");
+                AnsiConsole.MarkupLine($"[green]Ham Details: [/]{hamDetails}");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine("[red]Ham details not found.[/]");
+            }
+            AnsiConsole.MarkupLine("\nPress any key to continue...");
             Console.ReadKey();
         }
+
 
         //Radera en order via dess bookingId
         private void DeleteOrder(User user)

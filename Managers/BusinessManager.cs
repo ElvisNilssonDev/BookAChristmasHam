@@ -104,7 +104,7 @@ namespace BookAChristmasHam.Managers
             return business?.CompanyName;
         }
         
-        //Hämta en specifik skinka via dess hamId (BusinessMenu)
+        //Hämta en specifik ham via dess hamId (BusinessMenu)
         public ChristmasHam? GetHamById(int hamId)
         {
             return _hamStore.Get(hamId);
