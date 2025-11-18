@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookAChristmasHam.Models;
 using BookAChristmasHam.Managers;
+using BookAChristmasHam.Managers;
 using Spectre.Console;
 
 //ShowAllHam()
@@ -17,6 +18,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
     public class BusinessMenu
     {
+        private readonly BusinessManager _businessManager;
+
+        public BusinessMenu(BusinessManager businessManager)
+        {
+            _businessManager = businessManager;
+        }
+
         private readonly BusinessManager _businessManager;
 
         public BusinessMenu(BusinessManager businessManager)
@@ -46,6 +54,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 .AddChoices(new[]
                 {
                     "Show all your orders",
+                    "Show all your orders",
                     "Delete an order",
                     "Filter orders",
                     "Update an order",
@@ -56,8 +65,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                     case "Show all your orders":
                         //Visa alla ordrar som är kopplade till företagets CompanyName
                         ShowMyOrders(user);
+                    case "Show all your orders":
+                        //Visa alla ordrar som är kopplade till företagets CompanyName
+                        ShowMyOrders(user);
                         break;
                     case "Delete an order":
+                        //Radera en order via dess bookingId
+                        DeleteOrder(user);
                         //Radera en order via dess bookingId
                         DeleteOrder(user);
                         break;
@@ -79,95 +93,48 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
             }
         }
 
-
-
         //Visa alla ordrar kopplade till företaget
         private void ShowMyOrders(User user)
         {
-            while (true)
+            Console.Clear();
+            AnsiConsole.Write(
+                new FigletText("Your Orders")
+                .Centered()
+                .Color(Color.Red));
+
+            var orders = _businessManager.GetMyOrders(user.Id).ToList();
+
+            if (!orders.Any())
             {
-                Console.Clear();
-                AnsiConsole.Write(
-                    new FigletText("Your Orders")
-                    .Centered()
-                    .Color(Color.Red));
-
-                var orders = _businessManager.GetMyOrders(user.Id).ToList();
-
-                if (!orders.Any())
-                {
-                    AnsiConsole.MarkupLine("[yellow]No orders found for your business.[/]");
-                    AnsiConsole.MarkupLine("Press any key to continue...");
-                    Console.ReadKey();
-                    return;
-                }
-
-                //Tabell för att visa ordrar
-                var table = new Table();
-                table.AddColumn("[bold]Booking ID[/]");
-                table.AddColumn("[bold]User ID[/]");
-                table.AddColumn("[bold]Christmas Ham ID[/]");
-                table.AddColumn("[bold]Company Name[/]");
-
-                foreach (var order in orders)
-                {
-                    var companyName = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
-                    table.AddRow(
-                        order.Id.ToString(),
-                        order.UserId.ToString(),
-                        order.ChristmasHamId.ToString(),
-                        companyName
-                    );
-                }
-
-                //Visar tabellen
-                AnsiConsole.Write(table);
-
-                var choices = new List<object>(orders)
-                {
-                    "Cancel"
-                };
-
-                var selected = AnsiConsole.Prompt(
-                    new SelectionPrompt<object>()
-                        .Title("\n[green]Select an order:[/]")
-                        .UseConverter(obj =>
-                        {
-                            if (obj is Booking order)
-                            {
-                                var company = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
-                                return $"{order.Id} | User {order.UserId} | Ham {order.ChristmasHamId} | {company}";
-                            }
-                            return "[red]Cancel[/]";
-                        })
-                        .AddChoices(choices)
-                );
-                //Avbryt om användaren väljer att avbryta
-                if (selected is string)
-                    return;
-
-                var selectedOrder = (Booking)selected;
-
-
-                //Visa vilken som valdes
-                Console.Clear();
-                AnsiConsole.MarkupLine($"\n[bold green]You selected order ID: {selectedOrder.Id}[/]");
-                var ham = _businessManager.GetHamById(selectedOrder.ChristmasHamId);
-                if (ham != null)
-                {
-                    var hamDetails = ham.Data?.ToString() ?? "No details available.";
-                    AnsiConsole.MarkupLine($"\n[green]Ham ID:[/] {ham.Id}");
-                    AnsiConsole.MarkupLine($"[green]Ham Details: [/]{hamDetails}");
-                }
-                else
-                {
-                    AnsiConsole.MarkupLine("[red]Ham details not found.[/]");
-                }
-                AnsiConsole.MarkupLine("\nPress any key to continue...");
-                Console.ReadKey(true);
+                AnsiConsole.MarkupLine("[yellow]No orders found for your business.[/]");
+                AnsiConsole.MarkupLine("Press any key to continue...");
+                Console.ReadKey();
+                return;
             }
-        }
 
+            //Skapar en tabell för att visa bokningar
+            var table = new Table();
+            table.AddColumn("[bold]Booking ID[/]");
+            table.AddColumn("[bold]User ID[/]");
+            table.AddColumn("[bold]Christmas Ham ID[/]");
+            table.AddColumn("[bold]Company Name[/]");
+
+            foreach (var order in orders)
+            {
+                var companyName = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
+                table.AddRow(
+                    order.Id.ToString(),
+                    order.UserId.ToString(),
+                    order.ChristmasHamId.ToString(),
+                    companyName
+                );
+            }
+
+            AnsiConsole.Write(table);
+            AnsiConsole.MarkupLine($"\n[green]Total orders: {orders.Count}[/]");
+            AnsiConsole.MarkupLine("Press any key to continue...");
+            Console.ReadKey();
+        }
 
         //Radera en order via dess bookingId
         private void DeleteOrder(User user)
