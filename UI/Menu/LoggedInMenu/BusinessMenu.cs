@@ -51,7 +51,6 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                     "Update an order",
                     "Logout"
                 }));
-                AnsiConsole.MarkupLine($"You selected: [yellow]{choice}[/]");
                 switch (choice)
                 {
                     case "Show all your orders":
@@ -80,73 +79,93 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
             }
         }
 
+
+
         //Visa alla ordrar kopplade till företaget
         private void ShowMyOrders(User user)
         {
-            Console.Clear();
-            AnsiConsole.Write(
-                new FigletText("Your Orders")
-                .Centered()
-                .Color(Color.Red));
-
-            var orders = _businessManager.GetMyOrders(user.Id).ToList();
-
-            if (!orders.Any())
+            while (true)
             {
-                AnsiConsole.MarkupLine("[yellow]No orders found for your business.[/]");
-                AnsiConsole.MarkupLine("Press any key to continue...");
-                Console.ReadKey();
-                return;
-            }
+                Console.Clear();
+                AnsiConsole.Write(
+                    new FigletText("Your Orders")
+                    .Centered()
+                    .Color(Color.Red));
 
-            //Tabell för att visa ordrar
-            var table = new Table();
-            table.AddColumn("[bold]Booking ID[/]");
-            table.AddColumn("[bold]User ID[/]");
-            table.AddColumn("[bold]Christmas Ham ID[/]");
-            table.AddColumn("[bold]Company Name[/]");
+                var orders = _businessManager.GetMyOrders(user.Id).ToList();
 
-            foreach (var order in orders)
-            {
-                var companyName = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
-                table.AddRow(
-                    order.Id.ToString(),
-                    order.UserId.ToString(),
-                    order.ChristmasHamId.ToString(),
-                    companyName
+                if (!orders.Any())
+                {
+                    AnsiConsole.MarkupLine("[yellow]No orders found for your business.[/]");
+                    AnsiConsole.MarkupLine("Press any key to continue...");
+                    Console.ReadKey();
+                    return;
+                }
+
+                //Tabell för att visa ordrar
+                var table = new Table();
+                table.AddColumn("[bold]Booking ID[/]");
+                table.AddColumn("[bold]User ID[/]");
+                table.AddColumn("[bold]Christmas Ham ID[/]");
+                table.AddColumn("[bold]Company Name[/]");
+
+                foreach (var order in orders)
+                {
+                    var companyName = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
+                    table.AddRow(
+                        order.Id.ToString(),
+                        order.UserId.ToString(),
+                        order.ChristmasHamId.ToString(),
+                        companyName
+                    );
+                }
+
+                //Visar tabellen
+                AnsiConsole.Write(table);
+
+                var choices = new List<object>(orders)
+                {
+                    "Cancel"
+                };
+
+                var selected = AnsiConsole.Prompt(
+                    new SelectionPrompt<object>()
+                        .Title("\n[green]Select an order:[/]")
+                        .UseConverter(obj =>
+                        {
+                            if (obj is Booking order)
+                            {
+                                var company = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
+                                return $"{order.Id} | User {order.UserId} | Ham {order.ChristmasHamId} | {company}";
+                            }
+                            return "[red]Cancel[/]";
+                        })
+                        .AddChoices(choices)
                 );
-            }
+                //Avbryt om användaren väljer att avbryta
+                if (selected is string)
+                    return;
 
-            //Visar tabellen
-            AnsiConsole.Write(table);
+                var selectedOrder = (Booking)selected;
 
-            //Välj en order för mer detaljer
-            var selectedOrder = AnsiConsole.Prompt(
-                new SelectionPrompt<Booking>()
-                    .Title("\n[green]Select an order:[/]")
-                    .UseConverter(order =>
-                    {
-                        var company = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
-                        return $"{order.Id} | User {order.UserId} | Ham {order.ChristmasHamId} | {company}";
-                    })
-                    .AddChoices(orders)
-            );
 
-            //Visa vilken som valdes
-            AnsiConsole.MarkupLine($"\n[bold green]You selected order ID: {selectedOrder.Id}[/]");
-            var ham = _businessManager.GetHamById(selectedOrder.ChristmasHamId);
-            if (ham != null)
-            {
-                var hamDetails = ham.Data?.ToString() ?? "No details available.";
-                AnsiConsole.MarkupLine($"\n[green]Ham ID:[/] {ham.Id}");
-                AnsiConsole.MarkupLine($"[green]Ham Details: [/]{hamDetails}");
+                //Visa vilken som valdes
+                Console.Clear();
+                AnsiConsole.MarkupLine($"\n[bold green]You selected order ID: {selectedOrder.Id}[/]");
+                var ham = _businessManager.GetHamById(selectedOrder.ChristmasHamId);
+                if (ham != null)
+                {
+                    var hamDetails = ham.Data?.ToString() ?? "No details available.";
+                    AnsiConsole.MarkupLine($"\n[green]Ham ID:[/] {ham.Id}");
+                    AnsiConsole.MarkupLine($"[green]Ham Details: [/]{hamDetails}");
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine("[red]Ham details not found.[/]");
+                }
+                AnsiConsole.MarkupLine("\nPress any key to continue...");
+                Console.ReadKey(true);
             }
-            else
-            {
-                AnsiConsole.MarkupLine("[red]Ham details not found.[/]");
-            }
-            AnsiConsole.MarkupLine("\nPress any key to continue...");
-            Console.ReadKey();
         }
 
 

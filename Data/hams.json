@@ -130,5 +130,16 @@
       "IsCooked": true,
       "Week": 50
     }
+  },
+  {
+    "Id": 13,
+    "BusinessId": 160,
+    "Data": {
+      "WeightInterval": "Kg4To5",
+      "Brined": true,
+      "HasBones": false,
+      "IsCooked": true,
+      "Week": 52
+    }
   }
 ]
