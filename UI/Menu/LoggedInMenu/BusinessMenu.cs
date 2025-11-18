@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookAChristmasHam.Models;
+using BookAChristmasHam.Managers;
 using Spectre.Console;
 
 //ShowAllHam()
@@ -16,6 +17,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
     public class BusinessMenu
     {
+        private readonly BusinessManager _businessManager;
+
+        public BusinessMenu(BusinessManager businessManager)
+        {
+            _businessManager = businessManager;
+        }
+
         public void DisplayBusinessMenu(User user)
         {
             bool runningbusiness = true;
@@ -37,7 +45,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 .PageSize(10)
                 .AddChoices(new[]
                 {
-                    "Show all orders",
+                    "Show all your orders",
                     "Delete an order",
                     "Filter orders",
                     "Update an order",
@@ -46,17 +54,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 AnsiConsole.MarkupLine($"You selected: [yellow]{choice}[/]");
                 switch (choice)
                 {
-                    case "Show all orders":
-                    //Visa alla ordrar som är kopplade till företagets CompanyName
-                        AnsiConsole.MarkupLine("[blue]ShowAllHam()...[/]");
-                        AnsiConsole.MarkupLine("Press any key to continue...");
-                        Console.ReadKey();
+                    case "Show all your orders":
+                        //Visa alla ordrar som är kopplade till företagets CompanyName
+                        ShowMyOrders(user);
                         break;
                     case "Delete an order":
-                    //Radera en order via dess bookingId
-                        AnsiConsole.MarkupLine("[blue]DeleteOrder()...[/]");
-                        AnsiConsole.MarkupLine("Press any key to continue...");
-                        Console.ReadKey();
+                        //Radera en order via dess bookingId
+                        DeleteOrder(user);
                         break;
                     case "Filter orders":
                         AnsiConsole.MarkupLine("[blue]FilterOrder()...[/]");
@@ -74,6 +78,129 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 }
 
             }
+        }
+
+        //Visa alla ordrar kopplade till företaget
+        private void ShowMyOrders(User user)
+        {
+            Console.Clear();
+            AnsiConsole.Write(
+                new FigletText("Your Orders")
+                .Centered()
+                .Color(Color.Red));
+
+            var orders = _businessManager.GetMyOrders(user.Id).ToList();
+
+            if (!orders.Any())
+            {
+                AnsiConsole.MarkupLine("[yellow]No orders found for your business.[/]");
+                AnsiConsole.MarkupLine("Press any key to continue...");
+                Console.ReadKey();
+                return;
+            }
+
+            //Skapar en tabell för att visa bokningar
+            var table = new Table();
+            table.AddColumn("[bold]Booking ID[/]");
+            table.AddColumn("[bold]User ID[/]");
+            table.AddColumn("[bold]Christmas Ham ID[/]");
+            table.AddColumn("[bold]Company Name[/]");
+
+            foreach (var order in orders)
+            {
+                var companyName = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
+                table.AddRow(
+                    order.Id.ToString(),
+                    order.UserId.ToString(),
+                    order.ChristmasHamId.ToString(),
+                    companyName
+                );
+            }
+
+            AnsiConsole.Write(table);
+            AnsiConsole.MarkupLine($"\n[green]Total orders: {orders.Count}[/]");
+            AnsiConsole.MarkupLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        //Radera en order via dess bookingId
+        private void DeleteOrder(User user)
+        {
+            Console.Clear();
+            AnsiConsole.Write(
+                new FigletText("Delete Order")
+                .Centered()
+                .Color(Color.Red));
+
+            var orders = _businessManager.GetMyOrders(user.Id).ToList();
+
+            if (!orders.Any())
+            {
+                AnsiConsole.MarkupLine("[yellow]No orders found for your business.[/]");
+                AnsiConsole.MarkupLine("Press any key to continue...");
+                Console.ReadKey();
+                return;
+            }
+
+            //Låt användaren välja en order att radera
+            var orderChoices = orders.Select(order =>
+            {
+                var companyName = _businessManager.GetCompanyName(order.BusinessId) ?? "Unknown";
+                return $"Booking ID: {order.Id} | User ID: {order.UserId} | Ham ID: {order.ChristmasHamId} | Company: {companyName}";
+            }).ToList();
+
+            //Avbryta radering
+            orderChoices.Add("[red]Cancel[/]");
+
+            var selectedOrder = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("[green]Select an order to delete:[/]")
+                .PageSize(10)
+                .AddChoices(orderChoices));
+
+            //Avbryt om användaren väljer att avbryta
+            if (selectedOrder == "[red]Cancel[/]")
+            {
+                return;
+            }
+
+            //Få fram bookingId från den valda strängen
+            var bookingIdStr = selectedOrder.Split('|')[0].Replace("Booking ID:", "").Trim();
+            if (!int.TryParse(bookingIdStr, out int bookingId))
+            {
+                AnsiConsole.MarkupLine("[red]Error: Could not parse booking ID.[/]");
+                AnsiConsole.MarkupLine("Press any key to continue...");
+                Console.ReadKey();
+                return;
+            }
+
+            //Dubbelkolla med användaren innan radering
+            var confirm = AnsiConsole.Confirm(
+                $"[yellow]Are you sure you want to delete Booking ID: {bookingId}?[/]",
+                false);
+
+            if (!confirm)
+            {
+                AnsiConsole.MarkupLine("[blue]Deletion cancelled.[/]");
+                AnsiConsole.MarkupLine("Press any key to continue...");
+                Console.ReadKey();
+                return;
+            }
+
+            //Radera ordern
+            var isDeleted = _businessManager.DeleteOrder(bookingId);
+
+            if (isDeleted)
+            {
+                AnsiConsole.MarkupLine($"[green]Order with Booking ID {bookingId} has been successfully deleted![/]");
+            }
+            else
+            {
+                AnsiConsole.MarkupLine($"[red]Failed to delete order with Booking ID {bookingId}.[/]");
+            }
+
+            AnsiConsole.MarkupLine("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }

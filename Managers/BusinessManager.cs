@@ -32,6 +32,9 @@ namespace BookAChristmasHam.Managers
         //private readonly DataStore<Booking> _bookingStore;
         private readonly BookingManager _bookingManager;
 
+        //UserStore för att hämta CompanyName baserat på BusinessId
+        private readonly DataStore<User> _userStore;
+
         //// KONSTRUKTOR
         //public BusinessManager(DataStore<ChristmasHam> hamStore, DataStore<Booking> bookingstore)
         //{
@@ -44,6 +47,7 @@ namespace BookAChristmasHam.Managers
         {
             _hamStore = storage.HamStore;
             _bookingManager = new BookingManager(storage);
+            _userStore = storage.UserStore;
         }
 
         //-------------
@@ -64,7 +68,7 @@ namespace BookAChristmasHam.Managers
         // Uppdatera order
         public bool UpdateOrder(Booking updatedBooking)
         {
-           return _bookingManager.UpdateBooking(updatedBooking);
+            return _bookingManager.UpdateBooking(updatedBooking);
         }
 
 
@@ -78,6 +82,13 @@ namespace BookAChristmasHam.Managers
         public IEnumerable<Booking> GetMyOrders(int businessId)
         {
             return _bookingManager.GetBookingsByBusinessId(businessId);
+        }
+
+        //Hämta CompanyName baserat på BusinessId
+        public string? GetCompanyName(int businessId)
+        {
+            var business = _userStore.Get(businessId);
+            return business?.CompanyName;
         }
 
 
