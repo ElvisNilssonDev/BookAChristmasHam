@@ -90,6 +90,12 @@ namespace BookAChristmasHam.Managers
             var business = _userStore.Get(businessId);
             return business?.CompanyName;
         }
+        
+        //Hämta en specifik ham via dess hamId (BusinessMenu)
+        public ChristmasHam? GetHamById(int hamId)
+        {
+            return _hamStore.Get(hamId);
+        }
 
 
 

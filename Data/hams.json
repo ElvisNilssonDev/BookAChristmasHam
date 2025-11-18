@@ -1,7 +1,7 @@
 [
   {
     "Id": 1,
-    "BusinessId": 21,
+    "BusinessId": 20,
     "Data": {
       "WeightInterval": "Kg3To4",
       "Brined": true,
@@ -12,7 +12,7 @@
   },
   {
     "Id": 2,
-    "BusinessId": 22,
+    "BusinessId": 20,
     "Data": {
       "WeightInterval": "Kg4To5",
       "Brined": false,
@@ -23,7 +23,7 @@
   },
   {
     "Id": 3,
-    "BusinessId": 6,
+    "BusinessId": 20,
     "Data": {
       "WeightInterval": "Kg5To6",
       "Brined": false,
@@ -34,7 +34,7 @@
   },
   {
     "Id": 4,
-    "BusinessId": 14,
+    "BusinessId": 20,
     "Data": {
       "WeightInterval": "Kg3To4",
       "Brined": true,
@@ -107,6 +107,28 @@
       "HasBones": false,
       "IsCooked": false,
       "Week": 20
+    }
+  },
+  {
+    "Id": 11,
+    "BusinessId": 22,
+    "Data": {
+      "WeightInterval": "Kg4To5",
+      "Brined": true,
+      "HasBones": false,
+      "IsCooked": true,
+      "Week": 3
+    }
+  },
+  {
+    "Id": 12,
+    "BusinessId": 22,
+    "Data": {
+      "WeightInterval": "Kg4To5",
+      "Brined": false,
+      "HasBones": true,
+      "IsCooked": true,
+      "Week": 50
     }
   }
 ]
