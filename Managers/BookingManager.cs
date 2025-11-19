@@ -20,8 +20,8 @@ namespace BookAChristmasHam.Managers
         // lägg/skapa en bokning (Create)
         public void AddBooking(Booking booking)
         {
-            _bookingStore.Add(booking);            
-            _bookingStore.SaveToJson();          
+            _bookingStore.Add(booking);
+            _bookingStore.SaveToJson();
         }
 
 
@@ -69,5 +69,10 @@ namespace BookAChristmasHam.Managers
         }
 
 
+        // Hämta bokning via bookingId
+        public Booking? GetBookingById(int bookingId)
+        {
+            return _bookingStore.Get(bookingId);
+        }
     }
 }

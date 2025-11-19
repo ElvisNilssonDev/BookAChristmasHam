@@ -61,7 +61,20 @@ namespace BookAChristmasHam.Managers
         // Ta bort en order
         public bool DeleteOrder(int bookingId)
         {
-            return _bookingManager.DeleteBooking(bookingId);
+            // Hämta bokningen först
+            var booking = _bookingManager.GetBookingById(bookingId);
+            if (booking == null)
+            return false;
+
+            //Radera bokningen
+            var DeleteBooking = _bookingManager.DeleteBooking(bookingId);
+            if (!DeleteBooking)
+            return false;
+
+            //Radera skinkan som är kopplad till bokningen
+            _hamStore.Delete(booking.ChristmasHamId);
+            _hamStore.SaveToJson();
+            return true;
         }
 
 
@@ -91,7 +104,7 @@ namespace BookAChristmasHam.Managers
             return business?.CompanyName;
         }
         
-        //Hämta en specifik ham via dess hamId (BusinessMenu)
+        //Hämta en specifik skinka via dess hamId (BusinessMenu)
         public ChristmasHam? GetHamById(int hamId)
         {
             return _hamStore.Get(hamId);

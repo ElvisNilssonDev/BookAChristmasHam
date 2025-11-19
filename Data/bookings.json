@@ -7,13 +7,13 @@
   },
   {
     "Id": 3,
-    "UserId": 4,
+    "UserId": 2,
     "ChristmasHamId": 3,
     "BusinessId": 20
   },
   {
     "Id": 4,
-    "UserId": 4,
+    "UserId": 2,
     "ChristmasHamId": 4,
     "BusinessId": 20
   },
@@ -21,7 +21,7 @@
     "Id": 5,
     "UserId": 2,
     "ChristmasHamId": 5,
-    "BusinessId": 11
+    "BusinessId": 20
   },
   {
     "Id": 6,
