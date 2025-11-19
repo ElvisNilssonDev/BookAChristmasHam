@@ -8,7 +8,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 2
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 2,
@@ -19,7 +20,8 @@
       "HasBones": false,
       "IsCooked": true,
       "Week": 40
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 3,
@@ -30,7 +32,8 @@
       "HasBones": false,
       "IsCooked": true,
       "Week": 21
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 4,
@@ -41,7 +44,8 @@
       "HasBones": false,
       "IsCooked": false,
       "Week": 23
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 5,
@@ -52,7 +56,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 2
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 6,
@@ -63,7 +68,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 33
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 7,
@@ -74,7 +80,8 @@
       "HasBones": false,
       "IsCooked": true,
       "Week": 20
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 8,
@@ -85,7 +92,8 @@
       "HasBones": true,
       "IsCooked": false,
       "Week": 11
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 9,
@@ -96,7 +104,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 3
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 10,
@@ -107,6 +116,31 @@
       "HasBones": false,
       "IsCooked": false,
       "Week": 20
-    }
+    },
+    "CustomerId": 0
+  },
+  {
+    "Id": 11,
+    "BusinessId": 10,
+    "Data": {
+      "WeightInterval": "Kg4To5",
+      "Brined": false,
+      "HasBones": true,
+      "IsCooked": true,
+      "Week": 45
+    },
+    "CustomerId": 0
+  },
+  {
+    "Id": 12,
+    "BusinessId": 20,
+    "Data": {
+      "WeightInterval": "Kg3To4",
+      "Brined": false,
+      "HasBones": true,
+      "IsCooked": false,
+      "Week": 50
+    },
+    "CustomerId": 0
   }
 ]
