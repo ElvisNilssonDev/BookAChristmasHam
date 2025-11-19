@@ -30,12 +30,6 @@
     "BusinessId": 17
   },
   {
-    "Id": 7,
-    "UserId": 2,
-    "ChristmasHamId": 7,
-    "BusinessId": 6
-  },
-  {
     "Id": 8,
     "UserId": 4,
     "ChristmasHamId": 8,
@@ -64,5 +58,11 @@
     "UserId": 18,
     "ChristmasHamId": 13,
     "BusinessId": 160
+  },
+  {
+    "Id": 14,
+    "UserId": 18,
+    "ChristmasHamId": 14,
+    "BusinessId": 17
   }
 ]
