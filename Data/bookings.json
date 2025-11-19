@@ -1,11 +1,5 @@
 [
   {
-    "Id": 2,
-    "UserId": 2,
-    "ChristmasHamId": 2,
-    "BusinessId": 20
-  },
-  {
     "Id": 3,
     "UserId": 2,
     "ChristmasHamId": 3,

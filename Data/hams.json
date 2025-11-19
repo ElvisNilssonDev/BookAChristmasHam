@@ -1,17 +1,5 @@
 [
   {
-    "Id": 2,
-    "BusinessId": 20,
-    "Data": {
-      "WeightInterval": "Kg4To5",
-      "Brined": true,
-      "HasBones": true,
-      "IsCooked": true,
-      "Week": 2
-    },
-    "CustomerId": 0
-  },
-  {
     "Id": 3,
     "BusinessId": 20,
     "Data": {
