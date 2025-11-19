@@ -64,6 +64,11 @@ namespace BookAChristmasHam.Managers
 
         public void SeeMyOrders(User user)
         {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+            new FigletText("My Orders!")
+            .Centered()
+            .Color(Color.Yellow));
 
             // hämta bokningar från användaren
             var myBookings = _storageService.BookingStore.GetAll()
@@ -96,6 +101,7 @@ namespace BookAChristmasHam.Managers
                     continue;
                 }
 
+                var CustomerId = booking.UserId;
                 // hämta företaget
                 var businessId = booking.BusinessId;
 
@@ -109,9 +115,20 @@ namespace BookAChristmasHam.Managers
                     continue;
                 }
 
-                AnsiConsole.MarkupLine($"\n[green]Booking ID:[/] {booking.Id}");
-                AnsiConsole.MarkupLine($"[blue]Ham:[/] {myHam.Data}");
-                AnsiConsole.MarkupLine($"[blue]Delivered by:[/] {business.CompanyName}");
+                var table = new Table();
+                table.Border = TableBorder.Rounded; // try: None, Minimal, Double, Ascii2
+                table.Expand();
+
+                table.AddColumn("[yellow]Booking ID[/]");
+                table.AddColumn("[blue]Ham[/]");
+                table.AddColumn("[green]Delivered By[/]");
+                table.AddColumn("[purple]CustomerId[/]"); // <-- NEW COLUMN
+
+                table.AddRow(booking.Id.ToString(), myHam.Data.ToString(), business.CompanyName, booking.UserId.ToString());
+                
+
+                AnsiConsole.Write(table);
+
             }
 
 

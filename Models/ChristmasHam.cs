@@ -7,6 +7,7 @@ namespace BookAChristmasHam.Models
         public int Id { get; set; }           // ID för skinkan
         public int BusinessId { get; set; }   // ID för företaget som äger skinkan
         public HamData Data { get; set; }     // Egenskaper för skinkan
+        public int CustomerId { get; set; }
 
 
         // Konstruktor som används för att skapa ett ChrismasHam objekt

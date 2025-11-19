@@ -8,7 +8,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 2
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 3,
@@ -41,7 +42,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 2
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 6,
@@ -52,7 +54,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 33
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 7,
@@ -63,7 +66,8 @@
       "HasBones": false,
       "IsCooked": true,
       "Week": 20
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 8,
@@ -74,7 +78,8 @@
       "HasBones": true,
       "IsCooked": false,
       "Week": 11
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 9,
@@ -85,7 +90,8 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 3
-    }
+    },
+    "CustomerId": 0
   },
   {
     "Id": 10,
