@@ -23,8 +23,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
             _privateMenu = new PrivateMenu(storage);
         }
 
-        //private readonly PrivateMenu privateMenu = new PrivateMenu();
-        //private readonly BusinessMenu businessMenu = new BusinessMenu();
+        private readonly PrivateMenu privateMenu = new PrivateMenu();
 
         public User? Show()
         {
@@ -60,7 +59,8 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                             //Kolla användartyp och visa rätt meny
                             if (user.Type == UserType.Business)
                             {
-                                var businessMenu = new BusinessMenu();
+                                var businessManager = new BusinessManager(_storageService);
+                                var businessMenu = new BusinessMenu(businessManager);
                                 businessMenu.DisplayBusinessMenu(user);
                             }
                             else if (user.Type == UserType.Private)

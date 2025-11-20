@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookAChristmasHam.Models;
+using BookAChristmasHam.Managers;
 using Spectre.Console;
 
 //ShowAllHam()
@@ -16,6 +17,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
     public class BusinessMenu
     {
+        private readonly BusinessManager _businessManager;
+
+        public BusinessMenu(BusinessManager businessManager)
+        {
+            _businessManager = businessManager;
+        }
+
         public void DisplayBusinessMenu(User user)
         {
             bool runningbusiness = true;
@@ -28,7 +36,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 .Centered()
                 .Color(Color.Red));
                 AnsiConsole.Write(
-                new FigletText(user.Name)
+                new FigletText(user.CompanyName ?? "Business User")
                 .Centered()
                 .Color(Color.Green));
                 var choice = AnsiConsole.Prompt(
@@ -37,24 +45,21 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 .PageSize(10)
                 .AddChoices(new[]
                 {
-                    "Show all orders",
+                    "Show all your orders",
                     "Delete an order",
                     "Filter orders",
                     "Update an order",
                     "Logout"
                 }));
-                AnsiConsole.MarkupLine($"You selected: [yellow]{choice}[/]");
                 switch (choice)
                 {
-                    case "Show all orders":
-                        AnsiConsole.MarkupLine("[blue]ShowAllHam()...[/]");
-                        AnsiConsole.MarkupLine("Press any key to continue...");
-                        Console.ReadKey();
+                    case "Show all your orders":
+                        //Visa alla ordrar som är kopplade till företagets CompanyName
+                        _businessManager.ShowMyOrders(user);
                         break;
                     case "Delete an order":
-                        AnsiConsole.MarkupLine("[blue]DeleteOrder()...[/]");
-                        AnsiConsole.MarkupLine("Press any key to continue...");
-                        Console.ReadKey();
+                        //Radera en order via dess bookingId
+                        _businessManager.DeleteOrder(user);
                         break;
                     case "Filter orders":
                         AnsiConsole.MarkupLine("[blue]FilterOrder()...[/]");
@@ -67,7 +72,8 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                         Console.ReadKey();
                         break;
                     case "Logout":
-                        runningbusiness = false; // Exit the loop
+                        //Loggar ut användaren och återvänder till huvudmenyn
+                        runningbusiness = false;
                         break;
                 }
 

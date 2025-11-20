@@ -20,8 +20,8 @@ namespace BookAChristmasHam.Managers
         // lägg/skapa en bokning (Create)
         public void AddBooking(Booking booking)
         {
-            _bookingStore.Add(booking);            
-            _bookingStore.SaveToJson();          
+            _bookingStore.Add(booking);
+            _bookingStore.SaveToJson();
         }
 
 
@@ -31,7 +31,7 @@ namespace BookAChristmasHam.Managers
             var isDeleted = _bookingStore.Delete(bookingId);
             if (isDeleted)
             {
-                //_bookingStore.SaveToJson();
+                _bookingStore.SaveToJson();
             }
             return isDeleted;
         }
@@ -43,7 +43,7 @@ namespace BookAChristmasHam.Managers
             var result = _bookingStore.Update(updatedBooking);
             if (result)
             {
-                //_bookingStore.SaveToJson(); // Jhon kommer lägga till denna metod (SaveToJson()) i DataStore-klassen
+                _bookingStore.SaveToJson();
             }
             return result;
         }
@@ -69,5 +69,10 @@ namespace BookAChristmasHam.Managers
         }
 
 
+        // Hämta bokning via bookingId
+        public Booking? GetBookingById(int bookingId)
+        {
+            return _bookingStore.Get(bookingId);
+        }
     }
 }

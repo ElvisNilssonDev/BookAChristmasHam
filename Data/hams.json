@@ -1,9 +1,9 @@
 [
   {
-    "Id": 1,
-    "BusinessId": 21,
+    "Id": 3,
+    "BusinessId": 20,
     "Data": {
-      "WeightInterval": "Kg3To4",
+      "WeightInterval": "Kg4To5",
       "Brined": true,
       "HasBones": true,
       "IsCooked": true,
@@ -12,44 +12,20 @@
     "CustomerId": 0
   },
   {
-    "Id": 2,
-    "BusinessId": 22,
+    "Id": 4,
+    "BusinessId": 20,
     "Data": {
       "WeightInterval": "Kg4To5",
-      "Brined": false,
-      "HasBones": false,
-      "IsCooked": true,
-      "Week": 40
-    },
-    "CustomerId": 0
-  },
-  {
-    "Id": 3,
-    "BusinessId": 6,
-    "Data": {
-      "WeightInterval": "Kg5To6",
-      "Brined": false,
-      "HasBones": false,
-      "IsCooked": true,
-      "Week": 21
-    },
-    "CustomerId": 0
-  },
-  {
-    "Id": 4,
-    "BusinessId": 14,
-    "Data": {
-      "WeightInterval": "Kg3To4",
       "Brined": true,
-      "HasBones": false,
-      "IsCooked": false,
-      "Week": 23
+      "HasBones": true,
+      "IsCooked": true,
+      "Week": 2
     },
     "CustomerId": 0
   },
   {
     "Id": 5,
-    "BusinessId": 11,
+    "BusinessId": 20,
     "Data": {
       "WeightInterval": "Kg4To5",
       "Brined": true,
@@ -68,18 +44,6 @@
       "HasBones": true,
       "IsCooked": true,
       "Week": 33
-    },
-    "CustomerId": 0
-  },
-  {
-    "Id": 7,
-    "BusinessId": 6,
-    "Data": {
-      "WeightInterval": "Kg4To5",
-      "Brined": true,
-      "HasBones": false,
-      "IsCooked": true,
-      "Week": 20
     },
     "CustomerId": 0
   },
@@ -121,25 +85,49 @@
   },
   {
     "Id": 11,
-    "BusinessId": 10,
+    "BusinessId": 22,
     "Data": {
       "WeightInterval": "Kg4To5",
-      "Brined": false,
-      "HasBones": true,
+      "Brined": true,
+      "HasBones": false,
       "IsCooked": true,
-      "Week": 45
+      "Week": 3
     },
     "CustomerId": 0
   },
   {
     "Id": 12,
-    "BusinessId": 20,
+    "BusinessId": 22,
     "Data": {
-      "WeightInterval": "Kg3To4",
+      "WeightInterval": "Kg4To5",
       "Brined": false,
       "HasBones": true,
-      "IsCooked": false,
+      "IsCooked": true,
       "Week": 50
+    },
+    "CustomerId": 0
+  },
+  {
+    "Id": 13,
+    "BusinessId": 160,
+    "Data": {
+      "WeightInterval": "Kg4To5",
+      "Brined": true,
+      "HasBones": false,
+      "IsCooked": true,
+      "Week": 52
+    },
+    "CustomerId": 0
+  },
+  {
+    "Id": 14,
+    "BusinessId": 17,
+    "Data": {
+      "WeightInterval": "Kg3To4",
+      "Brined": true,
+      "HasBones": true,
+      "IsCooked": true,
+      "Week": 2
     },
     "CustomerId": 0
   }
