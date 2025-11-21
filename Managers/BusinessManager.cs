@@ -87,9 +87,12 @@ namespace BookAChristmasHam.Managers
 
 
         // FILTRERING: FILTRERAR PÅ ALLA PROPERTIES (VAR FÖR SIG) I BOOKING-ClASS.
-        public IEnumerable<Booking> FilterOrder(Func<Booking, bool> predicate)
+        public IEnumerable<Booking> FilterOrder(int businessId, Func<Booking, bool> predicate)
         {
-            return _bookingManager.Filter(predicate);
+            var myOrders = GetMyOrders(businessId);
+            return myOrders.Where(predicate);
+            //return _bookingManager.Filter(predicate);
+            //return _bookingManager.GetBookingsByBusinessId(businessId).Where(predicate);//LINA ÄNDRING IDAG
         }
 
         // Företaget anger businessId, och ser bokningar som alla user-Private har lagt via UserManager BookHam
@@ -280,6 +283,26 @@ namespace BookAChristmasHam.Managers
 
             AnsiConsole.MarkupLine("Press any key to continue...");
             Console.ReadKey();
+        }
+
+        public User? GetUserById(int userId)//gjorde nu
+        {
+            return _userStore.Get(userId);
+        }
+        public IEnumerable<(Booking booking, string email)>GetOrdersWithEmails(int businessId)
+        {
+            var bookings = _bookingManager.GetBookingsByBusinessId(businessId);
+            return bookings.Select(b=>
+            {
+                var user = _userStore.Get(b.UserId);
+                var email = user?.Email ?? "(Unknown)";
+                return (booking: b, email: email);//namngivna tupler ist för item2 osv
+            });
+        }//hit ner
+        public void UpdateHam(ChristmasHam ham)
+        {
+            _hamStore.Update(ham);
+            _hamStore.SaveToJson();
         }
 
 

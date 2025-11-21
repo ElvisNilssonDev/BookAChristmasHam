@@ -60,7 +60,7 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
                             if (user.Type == UserType.Business)
                             {
                                 var businessManager = new BusinessManager(_storageService);
-                                var businessMenu = new BusinessMenu(businessManager);
+                                var businessMenu = new BusinessMenu(businessManager, _storageService);
                                 businessMenu.DisplayBusinessMenu(user);
                             }
                             else if (user.Type == UserType.Private)
