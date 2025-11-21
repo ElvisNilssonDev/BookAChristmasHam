@@ -196,6 +196,59 @@
     "Username": null,
     "Type": "Business",
     "CompanyName": "burgerking"
+  },
+  {
+    "Id": 161,
+    "Name": "lina",
+    "Email": "lina",
+    "Password": "lina",
+    "Username": null,
+    "Type": "Business",
+    "CompanyName": "P\u00E5gen"
+  },
+  {
+    "Id": 162,
+    "Name": "LinaH",
+    "Email": "LinaH",
+    "Password": "LinaH",
+    "Username": null,
+    "Type": "Private",
+    "CompanyName": null
+  },
+  {
+    "Id": 163,
+    "Name": "Alice",
+    "Email": "Alice@example.com",
+    "Password": "password",
+    "Username": null,
+    "Type": "Private",
+    "CompanyName": null
+  },
+  {
+    "Id": 164,
+    "Name": "bobCorp",
+    "Email": "bob@example.com",
+    "Password": "secure",
+    "Username": null,
+    "Type": "Business",
+    "CompanyName": "BobCorp"
+  },
+  {
+    "Id": 165,
+    "Name": "pumpa",
+    "Email": "pumpa@12.com",
+    "Password": "pumpa",
+    "Username": null,
+    "Type": "Private",
+    "CompanyName": null
+  },
+  {
+    "Id": 166,
+    "Name": "jocke",
+    "Email": "jocke@hotmail.com",
+    "Password": "jocke",
+    "Username": null,
+    "Type": "Private",
+    "CompanyName": null
   }
- 
 ]

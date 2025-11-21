@@ -52,6 +52,10 @@ namespace BookAChristmasHam.Managers
         {
             return Filter(u => u.Type == UserType.Business);
         }
+        public User? GetUserById( int id)//la till nu här
+        {
+            return _userStore.Get(id);
+        }
         //public int GetNextUserId()
         //{
         //    return _userStore.GetNextId();
