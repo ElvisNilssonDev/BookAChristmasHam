@@ -33,12 +33,7 @@ namespace BookAChristmasHam.UI.Helper
                     var stopwatch = Stopwatch.StartNew();
                     action();
                     stopwatch.Stop();
-
-                    //if (stopwatch.ElapsedMilliseconds < 1000)
-                        Thread.Sleep(1000); // ge spinnern tid att synas
-
-                    //ctx.Status("[green]Done![/]");           // Show final status
-
+                    Thread.Sleep(1000); // ge spinnern tid att synas
                 });
 
 

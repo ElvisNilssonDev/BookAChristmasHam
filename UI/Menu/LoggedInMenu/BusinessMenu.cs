@@ -9,12 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//ShowAllHam()
-//DeleteOrder()
-//FilterOrder()
-//UppdateOrder()
-
-
 namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
     public class BusinessMenu

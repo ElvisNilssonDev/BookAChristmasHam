@@ -14,10 +14,6 @@ namespace BookAChristmasHam.UI.Printer
             // Resolve the full path using PathService
             _hamsFilePath = PathService.GetDataFilePath("hams.json");
         }
-
-        /// <summary>
-        /// Prints all orders for a specific customer.
-        /// </summary>
         public void PrintForCustomer(User customer)
         {
             var allHams = JsonService.ReadFromJsonFile<ChristmasHam>(_hamsFilePath) ?? new List<ChristmasHam>();
@@ -29,10 +25,6 @@ namespace BookAChristmasHam.UI.Printer
             AnsiConsole.MarkupLine($"[bold yellow]🧑‍🎄 Your Orders, {customer.Username}[/]");
             PrintHamTable(customerOrders);
         }
-
-        /// <summary>
-        /// Prints all orders for a specific business.
-        /// </summary>
         public void PrintForBusiness(Business business)
         {
             var allHams = JsonService.ReadFromJsonFile<ChristmasHam>(_hamsFilePath);
@@ -44,10 +36,6 @@ namespace BookAChristmasHam.UI.Printer
             AnsiConsole.MarkupLine($"[bold green]📦 Orders for {business.CompanyName}[/]");
             PrintHamTable(businessOrders);
         }
-
-        /// <summary>
-        /// Internal table printer.
-        /// </summary>
         private void PrintHamTable(List<ChristmasHam> hams)
         {
             if (hams.Count == 0)
@@ -85,10 +73,6 @@ namespace BookAChristmasHam.UI.Printer
 
             AnsiConsole.Write(table);
         }
-
-        /// <summary>
-        /// Converts WeightInterval enum to user-friendly label.
-        /// </summary>
         private static string WeightLabel(WeightInterval wi)
         {
             return wi switch

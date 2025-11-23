@@ -58,8 +58,6 @@ namespace BookAChristmasHam.Managers
             AnsiConsole.MarkupLine($"\n[green]Booking created![/]");
             AnsiConsole.MarkupLine($"[blue]Ham:[/] {ham.Data}");
             AnsiConsole.MarkupLine($"[blue]Delivered by:[/] {selectedBusiness.CompanyName}");
-
-
         }
 
         public void SeeMyOrders(User user)
@@ -128,51 +126,7 @@ namespace BookAChristmasHam.Managers
                 
 
                 AnsiConsole.Write(table);
-
             }
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-        //// USER-PRIVATE LÄGGER EN ORDER
-        //public void BookHam(User user, int hamId)
-        //{
-        //    if (user.Type == UserType.Business)
-        //    {
-        //        AnsiConsole.MarkupLine("[red]Companies cannot book hams.[/]");
-        //        return;
-        //    }
-
-        //    var ham = _hamStore.Get(hamId); // HÄMTER EN HAM MED VISS ID
-        //    if (ham == null) return; 
-
-        //    //var boo
-
-        //    //var booking = new Booking // EN NY BOOKING SKAPAS
-        //    //{
-        //    //    UserId = user.Id, // vem som bokar, user-Private ska boka
-        //    //    ChristmasHamId = ham.Id, 
-        //    //    BusinessId = ham.BusinessId // varje ham ägs av ett unik företag
-        //    //};
-
-        //    //_bookingManager.AddBooking(booking); // ORDER LÄGGS FÖR user-P
-        //    //AnsiConsole.MarkupLine("[green]The booking is complete![/]");
-        //}
-
     }
-
-
-
 }
