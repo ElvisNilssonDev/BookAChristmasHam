@@ -7,10 +7,9 @@ using Spectre.Console;
 
 namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 {
-
     public class EntryMenu
-    { // Visa meny för inloggning/registrering
-
+    {
+        // Visa meny för inloggning/registrering
         private readonly UserAccountManager _accountManager;
         private readonly StorageService _storageService;
         private readonly PrivateMenu _privateMenu;
@@ -19,11 +18,8 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
         {
             _accountManager = accountManager;
             _storageService = storage;
-
             _privateMenu = new PrivateMenu(storage);
         }
-
-        private readonly PrivateMenu privateMenu = new PrivateMenu();
 
         public User? Show()
         {
@@ -33,13 +29,14 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
             {
                 AnsiConsole.Clear();
                 AnsiConsole.Write(
-                new FigletText("Book A Christmas Ham!")
-                .Centered()
-                .Color(Color.Green3));
+                    new FigletText("Book A Christmas Ham!")
+                        .Centered()
+                        .Color(Color.Green3));
+
                 var choice = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                .Title("[bold]Choose an option:[/]")
-                .AddChoices("Log in", "Register new user", "Exit"));
+                    new SelectionPrompt<string>()
+                        .Title("[bold]Choose an option:[/]")
+                        .AddChoices("Log in", "Register new user", "Exit"));
 
                 switch (choice)
                 {
@@ -49,30 +46,29 @@ namespace BookAChristmasHam.UI.Menu.LoggRegMenu
 
                         if (user != null)
                         {
-                            // visa vilken user-type som loggade in
+                            // Visa vilken user-type som loggade in
                             LoadingUI.ShowLoginStatus(user);
 
-                            // ladda in 
+                            // Ladda in data
                             _storageService.LoadHamAndBooking();
-                            Thread.Sleep(1000); // ge användaren tid att läsa
+                            Thread.Sleep(1000);
 
-                            //Kolla användartyp och visa rätt meny
-                            if (user.Type == UserType.Business)
+                            // Kolla användartyp med switch-case
+                            switch (user.Type)
                             {
-                                var businessManager = new BusinessManager(_storageService);
-                                var businessMenu = new BusinessMenu(businessManager, _storageService);
-                                businessMenu.DisplayBusinessMenu(user);
-                            }
-                            else if (user.Type == UserType.Private)
-                            {
-                                
-                                //var privateMenu = new PrivateMenu();
-                                //privateMenu.ShowPriv(user);
-                                _privateMenu.ShowPriv(user);
-                            }
-                            else
-                            {
-                                AnsiConsole.MarkupLine("[red]Unknown user type![/]");
+                                case UserType.Business:
+                                    var businessManager = new BusinessManager(_storageService);
+                                    var businessMenu = new BusinessMenu(businessManager, _storageService);
+                                    businessMenu.DisplayBusinessMenu(user);
+                                    break;
+
+                                case UserType.Private:
+                                    _privateMenu.ShowPriv(user);
+                                    break;
+
+                                default:
+                                    AnsiConsole.MarkupLine("[red]Unknown user type![/]");
+                                    break;
                             }
                         }
                         break;
