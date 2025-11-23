@@ -28,12 +28,4 @@ namespace BookAChristmasHam.Models
     }
 
 
-  
-
-
-        // om vi vill lägga till fler properties i framtiden
-        //public DateTime BookingDate { get; set; }
-        //public int Quantity { get; set; }   = 0;
-
-
-    }
+}
