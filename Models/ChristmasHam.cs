@@ -14,7 +14,6 @@ namespace BookAChristmasHam.Models
         // Här skickar man in alla värden när man skapar skinkan
         public ChristmasHam(int businessId, HamData data)
         {
-            //Id = id;
             BusinessId = businessId;
             Data = data;
         }

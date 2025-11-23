@@ -5,24 +5,6 @@ using Spectre.Console;
 
 namespace BookAChristmasHam.Managers
 {
-    // DESIGNPRINCIP: Direkt sparning efter varje ändring
-    //
-    // I denna applikation sparas data direkt till fil (via SaveToJson()) i varje CRUD-metod,
-    // t.ex. Add(), Update(), Delete(). Detta är ett medvetet val för att undvika att data
-    // förloras eller blir inkonsekvent om användaren hoppar mellan menyer utan att avsluta.
-    //
-    // Eftersom applikationen är menybaserad och användaren kan göra flera operationer
-    // utan att explicit spara eller avsluta, säkerställer direkt sparning att:
-    // - Alla ändringar är permanenta direkt
-    // - Systemet alltid är synkroniserat med filen
-    // - Ingen data går förlorad om användaren gör flera operationer i följd
-    //
-    // Detta upplägg är robust och passar menybaserade appar där användaren interagerar
-    // direkt med datan utan batch-hantering eller ångra-funktion.
-
-
-
-
     // HANTERAR HAM 
     public class BusinessManager // Hanterar Ham-operationer + booknings-operationer för företagsanvändare
     {
@@ -49,16 +31,7 @@ namespace BookAChristmasHam.Managers
             _hamStore = storage.HamStore;
             _bookingManager = new BookingManager(storage);
             _userStore = storage.UserStore;
-        }
-
-        //-------------
-        //Fyll på med CRUD-OPERATION 
-        //-------------
-
-        //----------------------------------------------------------------------------------------------------
-        //BokningsOperationer: ALLA ORDERS KOMMER FRÅN USER-PRIVATE, OCH NU HAR USER-BUISNESS TILLGÅNG TILL DE
-        //----------------------------------------------------------------------------------------------------
-
+        }      
         // Ta bort en order
         public bool DeleteOrder(int bookingId)
         {
@@ -78,7 +51,6 @@ namespace BookAChristmasHam.Managers
             return true;
         }
 
-
         // Uppdatera order
         public bool UpdateOrder(Booking updatedBooking)
         {
@@ -90,9 +62,7 @@ namespace BookAChristmasHam.Managers
         public IEnumerable<Booking> FilterOrder(int businessId, Func<Booking, bool> predicate)
         {
             var myOrders = GetMyOrders(businessId);
-            return myOrders.Where(predicate);
-            //return _bookingManager.Filter(predicate);
-            //return _bookingManager.GetBookingsByBusinessId(businessId).Where(predicate);//LINA ÄNDRING IDAG
+            return myOrders.Where(predicate);            
         }
 
         // Företaget anger businessId, och ser bokningar som alla user-Private har lagt via UserManager BookHam
@@ -115,21 +85,10 @@ namespace BookAChristmasHam.Managers
         }
 
 
-
-
-
-        // ----HamOperationer
-
-        // HÄMTA ALLA HAM via businessId. Alltså, varje företag har viss lista av hams i sin depå.
-        // Och då behöver företaget ange deras businessId för att få se tillgång till just den. Det är en unik lista för varje företag.
-
         public IEnumerable<ChristmasHam> GetAllHams(int businessId)
         {
             return _hamStore.GetAll().Where(h => h.BusinessId == businessId);
         }
-
-
-        //-optional, E.X. FÖRETAGET VILL MODIFFIERA DÅ KAN VI TA TILL CRUD-FUNKTIONER 
 
         // LÄGG TILL HAM,
         public void AddHam(ChristmasHam ham)
@@ -146,8 +105,6 @@ namespace BookAChristmasHam.Managers
             _hamStore.Delete(hamId);
             _hamStore.SaveToJson();
         }
-
-
 
 
         //Visa alla ordrar kopplade till företaget, för BusinessMenu.cs

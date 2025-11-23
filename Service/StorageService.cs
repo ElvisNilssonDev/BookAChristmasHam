@@ -44,25 +44,10 @@ namespace BookAChristmasHam.Service
             //store.LoadFromJson(); // Läser in data från JSON-fil
             return store;
         }
-
-        //public void LoadUserData(User user)
-        //{
-        //    //UserStore.LoadFromJson(); // laddar om users
-        //    BookingStore.LoadFromJson(); // laddar om bokningar
-        //    HamStore.LoadFromJson();     // laddar om skinkor
-
-        //}
-
-
         public void LoadHamAndBooking()
         {
             BookingStore.LoadFromJson();
             HamStore.LoadFromJson();
         }
-
-
-
-
-
     }
 }

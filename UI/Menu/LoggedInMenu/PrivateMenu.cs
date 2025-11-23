@@ -75,14 +75,9 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                         AnsiConsole.MarkupLine("[red]Unauthorized choice!.[/]");
                         Console.ReadKey();
                         break;
-
-
-
-
-
                 }
             }
-        } //
+        }
 
 
 
@@ -141,15 +136,6 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 
             return hamData;
         }
-
-
-
-
-
-
-
-
-
     }
 }
 

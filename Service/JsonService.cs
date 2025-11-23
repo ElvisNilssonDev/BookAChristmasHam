@@ -112,14 +112,7 @@ namespace BookAChristmasHam.Service
                     var typeName = typeof(T).Name;
                     AnsiConsole.MarkupLine($"[red]Error saving {typeName} data to file:[/] {ex.Message}");
                 }
-
-
-
             });
         }
-
-
-
-
     }
 }

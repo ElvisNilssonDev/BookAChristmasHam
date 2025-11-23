@@ -5,17 +5,6 @@ using System.Xml.Linq;
 
 namespace BookAChristmasHam.Service
 {
-    //Generisk klass för datalagring
-
-    // Förklaring av  where T : Interfaces.IHasId.
-
-    //Global kontrakt för Id. Alla metoder som använder DataStore måste ha Id property och implementera IHasId
-    //Detta möjligjör lagring av olika typer av objekt med Id property.
-    //Alla metoder som använder DataStore måste ha Id property och implementera IHasId.
-    //metoderna måste följa kontraktet. Om inte måste de ha egna kontrakt.
-    //Möjliggöra generiska operationer.
-
-    // intern minneslagring
     public class DataStore<T> where T : Interfaces.IHasId
 
     {   // skapa lista för lagring av objekt
@@ -84,5 +73,5 @@ namespace BookAChristmasHam.Service
             return _items.Max(i => i.Id) + 1; // annars, hitta högsta id och lägg till 1
         }
 
-    } // end class
+    }
 }

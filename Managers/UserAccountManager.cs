@@ -56,11 +56,5 @@ namespace BookAChristmasHam.Managers
         {
             return _userStore.Get(id);
         }
-        //public int GetNextUserId()
-        //{
-        //    return _userStore.GetNextId();
-        //}
-
-
     }
 }
