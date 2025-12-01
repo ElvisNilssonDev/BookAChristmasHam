@@ -19,8 +19,8 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 {
     public class BusinessMenu
     {
-        private readonly BusinessManager _businessManager;
-        private readonly StorageService _storageService;
+        private readonly BusinessManager _businessManager;//hanterar businesslogik
+        private readonly StorageService _storageService;//för att få tillgång till json data stored
 
         public BusinessMenu(BusinessManager businessManager, StorageService storageService)
         {
@@ -83,13 +83,13 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
 
             }
         }
-        private void FilterOrders(User user)//User BusinessUser
+        private void FilterOrders(User user)//Denna hanterar sorterings-alternativen
         {
             bool filtering = true;
 
             while(filtering)
             {
-                var myOrderS = _businessManager.GetMyOrders(user.Id).ToList();
+                var myOrderS = _businessManager.GetMyOrders(user.Id).ToList();//skaffar bokningarna som är skrivna på företaget
 
                 var filterChoice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
@@ -106,13 +106,14 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                 switch (filterChoice)
                 {
                     case "Alphabetic order(By Name)":
+                        Console.Clear();
                         var userManager = new UserAccountManager(_storageService);
                         var allUsers = userManager.GetAllUsers().ToList();
                         //var myOrderS = _businessManager.GetMyOrders(user.Id).ToList();
 
-                        var sorted = myOrderS.OrderBy(o => allUsers.First(u => u.Id == o.UserId).Name).ToList();
+                        var sorted = myOrderS.OrderBy(o => allUsers.First(u => u.Id == o.UserId).Name).ToList();//sorterar de matchande UserID på ordrar till userlistan
 
-                        foreach(var order in sorted)
+                        foreach(var order in sorted)//visar ordrar sorted
                         {
                             var customer = allUsers.First(u => u.Id == order.UserId);
                             var ham = _storageService.HamStore.Get(order.ChristmasHamId);
@@ -122,18 +123,19 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                         break;
 
                     case "Sorted by weeks":
+                        Console.Clear();
 
                         var orders = _businessManager.GetMyOrders(user.Id).ToList();
                         var hams = _businessManager.GetAllHams(user.Id).ToList();
                         var userAccountManager = new UserAccountManager(_storageService);
                         //var userManager = new UserAccountManager(_storageService);
-
+                        //Grouped i leveransDatum i veckovis
                         var groupedWeeks = orders.GroupBy(o =>
                         {
                             var ham = hams.FirstOrDefault(h => h.Id == o.ChristmasHamId);
-                            return ham?.Data.Week ?? -1;
+                            return ham?.Data.Week ?? -1;//om de saknas
                         });
-                        foreach(var weekGroup in groupedWeeks.OrderBy(g=> g.Key))
+                        foreach(var weekGroup in groupedWeeks.OrderBy(g=> g.Key))//printar weeks
                         {
                             AnsiConsole.MarkupLine($"[bold blue]=== Week {weekGroup.Key} ===[/]");
                             foreach(var order in weekGroup)
@@ -151,6 +153,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                         break;
 
                     case "Filter by type of ham":
+                        Console.Clear();
                         var myOrders = _businessManager.GetMyOrders(user.Id).ToList();
                         FilterByHamProperties(user, myOrders);
                         break;

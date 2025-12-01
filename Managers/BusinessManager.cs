@@ -285,7 +285,7 @@ namespace BookAChristmasHam.Managers
             Console.ReadKey();
         }
 
-        public User? GetUserById(int userId)//gjorde nu
+        public User? GetUserById(int userId)
         {
             return _userStore.Get(userId);
         }
