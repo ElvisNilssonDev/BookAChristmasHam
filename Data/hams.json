@@ -238,5 +238,17 @@
       "Week": 49
     },
     "CustomerId": 0
+  },
+  {
+    "Id": 24,
+    "BusinessId": 16,
+    "Data": {
+      "WeightInterval": "Kg4To5",
+      "Brined": false,
+      "HasBones": true,
+      "IsCooked": true,
+      "Week": 44
+    },
+    "CustomerId": 0
   }
 ]

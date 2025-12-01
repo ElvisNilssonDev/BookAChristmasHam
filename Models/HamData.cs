@@ -5,8 +5,6 @@ namespace BookAChristmasHam.Models
     public class HamData
     {
 
-
-
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public WeightInterval WeightInterval { get; set; }  
 
