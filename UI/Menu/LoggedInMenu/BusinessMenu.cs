@@ -122,7 +122,7 @@ namespace BookAChristmasHam.UI.Menu.LoggedInMenu
                         Console.ReadKey();
                         break;
 
-                    case "Sorted by weeks":
+                    case "Sorted by weeks"://veckosortering
                         Console.Clear();
 
                         var orders = _businessManager.GetMyOrders(user.Id).ToList();
